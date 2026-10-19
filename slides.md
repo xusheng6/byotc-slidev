@@ -425,24 +425,6 @@ fonts:
 
 ---
 
-# System Informer
-
-<div class="case-claim">Who created the <span class="aqua">trusted caller?</span></div>
-<div class="case-foot">Trace process creation, handles, and the driver's decision.</div>
-
-<!-- Working case slide. Revisit the published finding and its fix; verify exact affected and fixed versions and the demonstrated operation. Source: https://xusheng.dev/posts/byotc/main/ -->
-
----
-
-# VirtualBox
-
-<div class="case-claim">A related <span class="aqua">process-hardening</span> boundary</div>
-<div class="case-foot">Compare the trust decision with System Informer.</div>
-
-<!-- Working case slide based on the accepted talk proposal. Add verified artifact/version and disclosure-safe evidence before finalizing. Do not imply the same impact as another product. -->
-
----
-
 # Move AV enforcement<br><span class="aqua">out of the kernel?</span>
 
 <div class="hero-sub">The client-to-service boundary still matters.</div>
@@ -456,6 +438,108 @@ fonts:
 <div class="deck-subtitle">xusheng.dev/posts/byotc/main</div>
 
 <!-- Reserve the remaining ten minutes for Q&A. -->
+
+---
+
+# What if the checks are stronger?
+
+<div class="backup-pair">
+  <div>System Informer</div>
+  <div>VirtualBox</div>
+</div>
+
+<!-- Optional case-study sequence. These products use more than a simple executable-name or signer check. System Informer has public analysis and a shipped fix: https://xusheng.dev/posts/byotc/main/ . The VirtualBox case is documented in Oracle disclosure S2240975 and the speaker's August 22, 2026 follow-up; use only within the speaker's disclosure plan. -->
+
+---
+
+# System Informer
+
+<div class="backup-statement">A system management tool with a <span class="aqua">privileged driver.</span></div>
+
+<!-- System Informer exposes powerful process-inspection and management capabilities through its kernel driver. Source: https://xusheng.dev/posts/byotc/main/ . This sets up the simplified protection model; do not suggest that every driver message has the same trust requirement. -->
+
+---
+
+# Five trust levels
+
+<div class="si-levels"><span>MINIMUM</span><span>LOW</span><span>MEDIUM</span><span>HIGH</span><strong>MAXIMUM</strong></div>
+<div class="backup-statement compact">Process termination requires <span class="aqua">MAXIMUM.</span></div>
+
+<!-- KSystemInformer evaluates cumulative process-integrity levels. MINIMUM checks the backing image; LOW adds signature verification; MEDIUM adds driver process protection; HIGH adds trusted loads/no debugger; MAXIMUM adds secure creation. Message permissions are operation-specific. KphMsgTerminateProcess requires MAXIMUM. Source: https://xusheng.dev/posts/byotc/main/ . -->
+
+---
+
+# The client is protected
+
+<div class="si-protection"><div class="si-outsider">Other process</div><b>✕</b><div class="si-protected">SystemInformer.exe</div></div>
+<div class="backup-statement compact">The driver blocks new handles that could change it.</div>
+
+<!-- Object Manager callbacks strip dangerous rights, including memory-write and thread-control rights, from handles opened by outside processes. This is a simplified depiction. The creator-handle exception is introduced next. Source: https://xusheng.dev/posts/byotc/main/ . -->
+
+---
+
+# MAXIMUM needs a trusted parent
+
+<div class="si-chain"><div>SystemInformer.exe<br><small>HIGH</small></div><b>→</b><div class="si-final">SystemInformer.exe<br><small>MAXIMUM</small></div><b>→</b><div>Privileged request</div></div>
+
+<!-- This is the old secure-creation rule: a HIGH System Informer instance could create a child that was promoted to MAXIMUM after the other integrity checks passed. Only the final MAXIMUM process could send KphMsgTerminateProcess. Source: https://xusheng.dev/posts/byotc/main/ . -->
+
+---
+
+# But the creator keeps its handle
+
+<div class="si-chain two"><div class="si-evil">Creator</div><b>→</b><div class="si-final">Protected child</div></div>
+<div class="backup-statement compact">That existing handle can still write to the child.</div>
+
+<!-- Under the affected System Informer design, KphpShouldPermitCreatorProcess allowed the actual creator PROCESS_VM_OPERATION and PROCESS_VM_WRITE, even while the object callback blocked later outsiders. The handle is obtained during process creation and remains usable. Do not claim Windows universally requires VM_WRITE for CreateProcess: the January 2026 correspondence with the maintainer discusses product compatibility and the related VirtualBox report explicitly corrected that misconception. Source: https://xusheng.dev/posts/byotc/main/ . -->
+
+---
+
+# So be the grandparent
+
+<div class="si-family"><div class="si-evil">Attacker</div><b>→</b><div>System Informer<br><small>HIGH · altered</small></div><b>→</b><div class="si-final">System Informer<br><small>MAXIMUM · altered</small></div></div>
+
+<!-- The attacker creates the genuine intermediate System Informer instance and changes it through the retained creator handle. That altered HIGH process creates the genuine final instance; its creator handle can change the MAXIMUM child. Both images can still pass on-disk verification. This was the reported evil-parent chain; present it as the affected pre-fix design. Source: https://xusheng.dev/posts/byotc/main/ . -->
+
+---
+
+# System Informer changed the root
+
+<div class="si-family"><div class="si-root">services.exe<br><small>WinTcb protected</small></div><b>→</b><div>System Informer<br><small>HIGH</small></div><b>→</b><div class="si-final">System Informer<br><small>MAXIMUM</small></div></div>
+
+<!-- The fix roots secure creation in a protected services.exe process rather than letting an ordinary administrator manufacture the chain. It also prevents handle duplication across the verified-process boundary. The maintainer confirmed on August 29, 2026 that the updated signed driver shipped in the Release Channel. Source: https://xusheng.dev/posts/byotc/main/ and the System Informer maintainer's August 29, 2026 email in the disclosure thread. -->
+
+---
+
+# VirtualBox hardens the VM process
+
+<div class="backup-statement">A trusted VM process gets a <span class="aqua">privileged driver session.</span></div>
+
+<!-- Oracle VirtualBox's Windows process-hardening design validates the final hardened process (P3) before it obtains the privileged VBoxDrv session. The related disclosure is Oracle S2240975, initially reported June 12, 2025. See the speaker's August 22, 2026 follow-up email with stock-signed 7.2.6a and 7.2.16 PoCs. Do not conflate this with a generic VirtualBox VM escape. -->
+
+---
+
+# VirtualBox also uses a chain
+
+<div class="si-family"><div>Launcher<br><small>P1</small></div><b>→</b><div>Hardened child<br><small>P2</small></div><b>→</b><div class="si-final">Final VM process<br><small>P3 · trusted session</small></div></div>
+
+<!-- Simplified P1→P2→P3 startup described in Oracle S2240975 correspondence. The final P3 is the process that obtains the privileged driver session. The August 2026 PoC crossed this trust boundary on stock signed releases. The labels are explanatory, not literal process names. -->
+
+---
+
+# The handle disappears; the change remains
+
+<div class="vbox-sequence"><div><strong>1</strong><span>Parent changes child</span></div><b>→</b><div><strong>2</strong><span>Parent closes handle</span></div><b>→</b><div><strong>3</strong><span>Driver validates child</span></div></div>
+
+<!-- Simplified VirtualBox S2240975 sequence. The product's creator exception allowed PROCESS_VM_WRITE for startup; the parent used that handle before the final child opened \\Device\\VBoxDrv, then closed it. Validation observed the signed image and no dangerous live handle, while attacker-controlled data/control flow remained. Windows itself does not require a parent to have VM_WRITE merely to create a child; this was corrected in the speaker's January 21, 2026 Oracle email. The full demonstration used code reuse rather than modifying signed executable pages. -->
+
+---
+
+# Validation passed. Control survived.
+
+<div class="vbox-outcome"><div>Hardened VM process<br><small>attacker-controlled code</small></div><b>→</b><div>Trusted driver request<br><small>accepted</small></div></div>
+
+<!-- Bounded demonstrated result: the speaker's August 22, 2026 follow-up reported stock signed VirtualBox 7.2.6a ROP in P3; 7.2.16's added stack checks blocked that original route, but a separate stock-signed 7.2.16 PoC achieved code execution in confirmed P3 and sent SUP_IOCTL_GET_PAGING_MODE through the inherited driver session. A restricted-session negative control was denied. This is a trust-gated paging-mode query, not proof of arbitrary privileged driver operations or VM escape. Oracle acknowledged the follow-up on August 24, 2026; no vendor fix confirmation was found in the checked thread. Disclosure reference S2240975. -->
 
 ---
 
