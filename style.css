@@ -387,7 +387,7 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .vbox-no-notice { margin-top:35px; font-size:32px; font-weight:800; }
 .vbox-daybreak { margin-top:14px; font-size:27px; font-weight:750; }
 .vbox-exploit-lines { display:flex; flex-direction:column; gap:25px; margin-top:62px; font-size:37px; line-height:1.15; font-weight:800; }
-.vbox-exploit-lines > div { border-left:5px solid var(--aqua); padding-left:22px; }
+.vbox-exploit-lines > div { padding-left:0; }
 .vbox-sequence { display:flex; align-items:center; gap:12px; margin-top:110px; }
 .vbox-sequence div { flex:1; min-width:0; border-top:4px solid var(--line); display:flex; flex-direction:column; gap:20px; padding-top:19px; }
 .vbox-sequence strong { color:var(--aqua); font-size:44px; }
