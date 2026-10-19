@@ -376,6 +376,14 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .vbox-attack-flow strong { color:var(--aqua); font-size:34px; }
 .vbox-attack-flow span { margin-top:14px; font-size:26px; line-height:1.15; font-weight:800; }
 .vbox-attack-flow b { flex:none; color:var(--aqua); font-size:32px; }
+.vbox-attack-contrast, .vbox-version-pair, .vbox-hardening { display:flex; align-items:stretch; gap:28px; margin-top:108px; }
+.vbox-attack-contrast div, .vbox-version-pair div, .vbox-hardening div { flex:1; min-width:0; min-height:210px; padding:28px; border:3px solid var(--line); border-radius:12px; background:#11202a; display:flex; flex-direction:column; justify-content:center; }
+.vbox-attack-contrast small, .vbox-hardening time { color:var(--aqua); font-size:27px; font-weight:800; }
+.vbox-attack-contrast strong, .vbox-hardening strong { margin-top:20px; font-size:36px; line-height:1.14; }
+.vbox-version-pair div { text-align:center; align-items:center; }
+.vbox-version-pair strong { color:var(--aqua); font-size:48px; }
+.vbox-version-pair span { margin-top:18px; font-size:30px; font-weight:800; }
+.vbox-version-pair b { align-self:center; color:var(--aqua); font-size:45px; }
 .vbox-sequence { display:flex; align-items:center; gap:12px; margin-top:110px; }
 .vbox-sequence div { flex:1; min-width:0; border-top:4px solid var(--line); display:flex; flex-direction:column; gap:20px; padding-top:19px; }
 .vbox-sequence strong { color:var(--aqua); font-size:44px; }

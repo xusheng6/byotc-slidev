@@ -591,6 +591,46 @@ fonts:
 
 ---
 
+# They Wanted a PoC
+
+<div class="vbox-attack-contrast"><div><small>Oracle's question</small><strong>Can this reach P3?</strong></div><div><small>My obstacle</small><strong>A full ROP chain was a lot of work.</strong></div></div>
+
+<!-- On January 15, 2026 Oracle asked for a proof of concept because its team did not believe the theory was exploitable. The speaker replied January 16 that the two-parent chain and ROP construction would require substantial effort. Oracle declined the report June 3, 2026 because a feasible path through the final child had not been demonstrated. The original June 2025 report explicitly said a full exploit would be complex to construct. Sources: Oracle S2240975 email threads. -->
+
+---
+
+# So I Asked AI to Build It
+
+<div class="vbox-big-lines"><div>Revisit the VirtualBox report.</div><div>Ask for an <span class="aqua">end-to-end PoC.</span></div></div>
+
+<!-- The speaker later used AI assistance to build the proof of concept. The August 22, 2026 Oracle follow-up reports a stock-signed VirtualBox 7.2.6a demonstration: attacker-controlled ROP in final P3, a marker write, and return to VirtualBox's original continuation. It used unmodified signed executables and driver. Describe this as AI-assisted research, not as evidence that every step was autonomous. Source: August 22, 2026 follow-up for S2240975. -->
+
+---
+
+# An April Surprise in the Source
+
+<div class="vbox-hardening"><div><time>Apr 16, 2026</time><strong>Return-address checks</strong></div><div><time>Apr 16, 2026</time><strong>Full stack-consistency checks</strong></div></div>
+
+<!-- Public source commits bcfbf910d779b927a94dbb5d82b6527664093592 and 6485c4edbb37dd133c14f3f561c6eab69979000a, both authored April 16, 2026. Their commit messages say they add return-address and full stack-consistency checks. The latter includes stack hashing around selected waits and related syscalls. The speaker's August 22 report says these changes block the original stack-based PoC. The correspondence reviewed does not tie the commits to Oracle case S2240975 or explain the internal reason for the changes; avoid asserting that Oracle secretly fixed this report. Sources: https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592 and https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a . -->
+
+---
+
+# The Original ROP Route Was Blocked
+
+<div class="vbox-version-pair"><div><strong>7.2.6a</strong><span>ROP in P3 demonstrated</span></div><b>→</b><div><strong>7.2.16</strong><span>Original stack route blocked</span></div></div>
+
+<!-- The stock-signed 7.2.6a PoC showed ROP execution in P3. In the August 22, 2026 follow-up, the speaker explicitly stated that April return-address and full stack-consistency checks blocked that original route on 7.2.16. This is a version-specific result; it does not show that the overall trust boundary was fixed. -->
+
+---
+
+# But There Was Another Route
+
+<div class="vbox-big-lines"><div>AI found a different path in <span class="aqua">7.2.16.</span></div><div>Code ran in verified P3.</div></div>
+
+<!-- The separate stock-signed 7.2.16 PoC avoided the protected P3 stack, achieved code execution in confirmed P3, and submitted trust-gated SUP_IOCTL_GET_PAGING_MODE through P3's inherited driver session. A restricted-session negative control was denied. This demonstrates that one trust-gated driver request was serviced, not arbitrary driver commands, process termination, or VM escape. Oracle acknowledged receipt August 24, 2026; no later vendor resolution is established here. Source: speaker's August 22, 2026 S2240975 follow-up. -->
+
+---
+
 # Move AV enforcement<br><span class="aqua">out of the kernel?</span>
 
 <div class="hero-sub">The client-to-service boundary still matters.</div>
