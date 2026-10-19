@@ -446,7 +446,7 @@ fonts:
 
 ---
 
-# Five trust levels
+<h1 class="si-long-title">Driver Classifies Clients<br>into Five Trust Levels</h1>
 
 <div class="si-levels"><span>MINIMUM</span><span>LOW</span><span>MEDIUM</span><span>HIGH</span><strong>MAXIMUM</strong></div>
 <div class="backup-statement compact">Process termination requires <span class="aqua">MAXIMUM.</span></div>
@@ -455,7 +455,7 @@ fonts:
 
 ---
 
-# Protecting the client
+# Driver Protects the Client
 
 <div class="si-handle-filter"><div>Other process</div><b>→</b><div class="si-filter">Object Manager callback<small>ObRegisterCallbacks</small></div><b>→</b><div class="si-protected">SystemInformer.exe</div></div>
 <div class="si-filter-result">New process / thread handles lose <strong>memory-write</strong> and <strong>thread-control</strong> rights.</div>
@@ -464,16 +464,16 @@ fonts:
 
 ---
 
-# The creator already has a handle
+# Be the Parent
 
-<div class="si-creator-flow"><div class="si-evil">Creator</div><b>→</b><div class="si-final">Protected child</div></div>
-<div class="si-creator-rights">Under the affected rule, its handle keeps <strong>memory-write rights.</strong></div>
+<div class="si-creator-flow"><div class="si-evil">evil.exe</div><b>creates →</b><div class="si-final">SystemInformer.exe</div></div>
+<div class="si-creator-rights">Creator keeps a process handle with <strong>PROCESS_VM_WRITE.</strong></div>
 
 <!-- Under the affected System Informer design, KphpShouldPermitCreatorProcess allowed the actual creator PROCESS_VM_OPERATION and PROCESS_VM_WRITE, even while the object callback blocked later outsiders. The handle is obtained during process creation and remains usable. This is not a claim that CreateProcess universally requires VM_WRITE, or that every creator handle is unrestricted. Source: https://xusheng.dev/posts/byotc/main/ and https://github.com/winsiderss/systeminformer/blob/553d309edb07934bda9387cff29a82ca1714acbb/KSystemInformer/protection.c#L581-L621 . -->
 
 ---
 
-# MAXIMUM needs a trusted parent
+# MAXIMUM Requires a HIGH Parent
 
 <div class="si-parent-comparison">
   <div class="si-parent-row"><div>SystemInformer.exe<small>HIGH</small></div><b>→</b><div>SystemInformer.exe<small>MAXIMUM</small></div><b>→</b><div class="si-allowed">Privileged request</div></div>
