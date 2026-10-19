@@ -570,14 +570,6 @@ fonts:
 
 ---
 
-# The Handle Closes. Control Survives.
-
-<div class="vbox-attack-contrast"><div><small>At verification</small><strong>No writable parent handle</strong></div><div><small>After verification</small><strong>P3 executes the prepared chain</strong></div></div>
-
-<!-- The check observes live handle rights at the time P3 opens VBoxDrv, not a history of earlier modifications. This makes the sequence a time-of-check/time-of-use issue: attacker-controlled control flow can be staged while P2 still holds its allowed creator handle, then activated after that handle is closed and P3 is verified. Source: SUPDrv-win.cpp supdrvNtProtectRestrictHandlesToProcessAndThread; Oracle S2240975 correspondence. -->
-
----
-
 # Code Reuse Bridges the Trust Check
 
 <div class="vbox-big-lines"><div>We cannot carry the handle through.</div><div>We carry <span class="aqua">future control flow</span> instead.</div></div>

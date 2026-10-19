@@ -376,10 +376,6 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .vbox-attack-flow strong { color:var(--aqua); font-size:34px; }
 .vbox-attack-flow span { margin-top:14px; font-size:26px; line-height:1.15; font-weight:800; }
 .vbox-attack-flow b { flex:none; color:var(--aqua); font-size:32px; }
-.vbox-attack-contrast { display:flex; gap:30px; margin-top:115px; }
-.vbox-attack-contrast div { flex:1; min-height:220px; padding:29px; border:3px solid var(--line); border-radius:12px; background:#11202a; display:flex; flex-direction:column; justify-content:center; }
-.vbox-attack-contrast small { color:var(--aqua); font-size:27px; font-weight:800; }
-.vbox-attack-contrast strong { margin-top:20px; font-size:37px; line-height:1.16; }
 .vbox-sequence { display:flex; align-items:center; gap:12px; margin-top:110px; }
 .vbox-sequence div { flex:1; min-width:0; border-top:4px solid var(--line); display:flex; flex-direction:column; gap:20px; padding-top:19px; }
 .vbox-sequence strong { color:var(--aqua); font-size:44px; }
