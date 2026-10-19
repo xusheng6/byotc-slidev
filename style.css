@@ -306,10 +306,12 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-chain.two { max-width:900px; margin-left:70px; }
 .si-creator-flow { display:flex; align-items:center; max-width:1030px; gap:24px; margin:100px auto 0; }
 .si-creator-flow div { flex:1; min-height:150px; border:3px solid var(--line); border-radius:12px; background:#11202a; padding:22px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:43px; font-weight:800; }
-.si-creator-flow b { color:var(--aqua); font-size:33px; white-space:nowrap; }
+.si-create-arrow { flex:none; min-width:240px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; }
+.si-create-arrow span { color:var(--aqua); font:27px Menlo,monospace; }
+.si-create-arrow b { color:var(--aqua); font-size:57px; line-height:.9; }
 .si-creator-flow .si-evil { color:var(--orange); border-color:var(--orange); }
 .si-creator-flow .si-final { border-color:var(--aqua); }
-.si-creator-rights { margin-top:85px; font-size:43px; line-height:1.22; font-weight:740; }
+.si-creator-rights { margin-top:65px; font-size:36px; line-height:1.34; font-weight:740; }
 .si-creator-rights strong { color:var(--aqua); }
 .si-parent-comparison { display:flex; flex-direction:column; gap:58px; margin-top:83px; }
 .si-parent-row { display:flex; align-items:center; gap:15px; }
