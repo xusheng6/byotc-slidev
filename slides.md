@@ -602,17 +602,17 @@ fonts:
 
 ---
 
-# AI Built the Old PoC
+# AI Found a Different Vulnerability
 
-<div class="vbox-version-pair"><div><strong>7.2.6a</strong><span>ROP PoC worked in P3</span></div><b>→</b><div><strong>7.2.16</strong><span>That route no longer worked</span></div></div>
+<div class="vbox-attack-flow"><div><strong>7.2.6a</strong><span>AI proved my original report</span></div><b>→</b><div><strong>April patch</strong><span>That route stopped working</span></div><b>→</b><div><strong>7.2.16</strong><span>AI found a different vulnerability</span></div></div>
 
-<!-- The stock-signed 7.2.6a PoC showed ROP execution in P3. In the August 22, 2026 follow-up, the speaker explicitly stated that April return-address and full stack-consistency checks blocked that original route on 7.2.16. This is a version-specific result; it does not show that the overall trust boundary was fixed. -->
+<!-- The stock-signed 7.2.6a PoC demonstrated the original reported ROP route executing in P3. In the August 22, 2026 follow-up, the speaker said the April return-address and full stack-consistency checks blocked that stack-based route on 7.2.16. A separate 7.2.16 PoC used a different route. These are version-specific demonstrations; the older PoC did not work unchanged on 7.2.16. -->
 
 ---
 
-# AI Found a Better Route
+# The New PoC Reached P3
 
-<div class="vbox-big-lines"><div>The stack was protected.</div><div>Another path still reached <span class="aqua">verified P3.</span></div></div>
+<div class="vbox-big-lines"><div>Code ran in <span class="aqua">verified P3.</span></div><div>A trust-gated driver request succeeded.</div></div>
 
 <!-- The separate stock-signed 7.2.16 PoC avoided the protected P3 stack, achieved code execution in confirmed P3, and submitted trust-gated SUP_IOCTL_GET_PAGING_MODE through P3's inherited driver session. A restricted-session negative control was denied. This demonstrates that one trust-gated driver request was serviced, not arbitrary driver commands, process termination, or VM escape. Oracle acknowledged receipt August 24, 2026; no later vendor resolution is established here. Source: speaker's August 22, 2026 S2240975 follow-up. -->
 
