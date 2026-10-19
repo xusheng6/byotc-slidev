@@ -578,6 +578,19 @@ fonts:
 
 ---
 
+# VirtualBox Disclosure Timeline
+
+<div class="disclosure-timeline vbox-disclosure-timeline">
+  <div><time>Jun 12, 2025</time><strong>Reported the proposed bypass</strong></div>
+  <div><time>Dec 22, 2025</time><strong>After six months, Oracle disputed it</strong></div>
+  <div><time>Jan 2026</time><strong>Explained the P2 → P3 timing</strong></div>
+  <div><time>Jun 3, 2026</time><strong>Oracle declined: final-child path unproven</strong></div>
+</div>
+
+<!-- Oracle case S2240975. Original report sent June 12, 2025. Oracle acknowledged receipt that day and assigned a tracking number June 16; its first substantive assessment came December 22, 2025 (roughly six months later) and said the second process could not be controlled by its parent. The speaker clarified the time-of-check/time-of-use and P2→P3 sequence in December 2025 and January 2026. On June 3, 2026 Oracle said it did not consider the report a bug because the material had not demonstrated a feasible way to sustain the attack through the final child. The email says it declined the report, not explicitly that the case was closed. Later, on August 22, 2026, the speaker supplied stock-signed 7.2.6a and 7.2.16 PoCs; Oracle acknowledged the follow-up August 24. Sources: https://mail.google.com/mail/u/?authuser=xusheng%40vector35.com#all/197657d45a82b5ee and https://mail.google.com/mail/u/?authuser=xusheng%40vector35.com#all/19b4bc2aac6047de . -->
+
+---
+
 # Move AV enforcement<br><span class="aqua">out of the kernel?</span>
 
 <div class="hero-sub">The client-to-service boundary still matters.</div>
