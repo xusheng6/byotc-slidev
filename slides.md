@@ -467,9 +467,10 @@ fonts:
 # Be the Parent
 
 <div class="si-creator-flow"><div class="si-evil">evil.exe</div><section class="si-create-arrow"><span>CreateProcessA</span><b>→</b></section><div class="si-final">SystemInformer.exe</div></div>
-<div class="si-creator-rights">Creator handle: <strong>PROCESS_ALL_ACCESS</strong> by default.<br>System Informer's filter still permits <strong>PROCESS_VM_WRITE.</strong></div>
+<div class="si-creator-rights">CreateProcessA requests full access; the callback trims it.</div>
+<div class="si-creator-access"><div><span>PROCESS HANDLE</span><code>PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_TERMINATE</code></div><div><span>THREAD HANDLE</span><code>THREAD_RESUME | THREAD_TERMINATE</code></div></div>
 
-<!-- CreateProcess returns a creator handle with PROCESS_ALL_ACCESS by default, subject to security restrictions: https://learn.microsoft.com/en-us/windows/win32/procthread/process-security-and-access-rights . The affected System Informer Object Manager callback can reduce that requested mask, but KphpShouldPermitCreatorProcess allows the actual creator PROCESS_VM_OPERATION and PROCESS_VM_WRITE. Do not claim the final handle is necessarily PROCESS_ALL_ACCESS, or that CreateProcess universally requires VM_WRITE. Sources: https://xusheng.dev/posts/byotc/main/ and https://github.com/winsiderss/systeminformer/blob/553d309edb07934bda9387cff29a82ca1714acbb/KSystemInformer/protection.c#L581-L621 . -->
+<!-- CreateProcess returns creator handles with full access by default, subject to security restrictions: https://learn.microsoft.com/en-us/windows/win32/procthread/process-security-and-access-rights . The affected System Informer Object Manager callback could reduce that mask. Its creator exception added KPH_PROCESS_READ_ACCESS, PROCESS_TERMINATE, PROCESS_VM_OPERATION, PROCESS_VM_WRITE, and for threads KPH_THREAD_READ_ACCESS, THREAD_TERMINATE, THREAD_RESUME. THREAD_SET_CONTEXT was not in this creator exception. These are selected rights, not an exhaustive enumeration of the final handle mask. Source: https://xusheng.dev/posts/byotc/main/ and https://github.com/winsiderss/systeminformer/blob/553d309edb07934bda9387cff29a82ca1714acbb/KSystemInformer/protection.c#L581-L829 . -->
 
 ---
 
