@@ -1,0 +1,14 @@
+{
+  "name": "byotc-slidev-mockup",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open=false",
+    "build": "slidev build",
+    "export": "slidev export"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.0.0",
+    "@slidev/theme-default": "^0.25.0",
+    "playwright-chromium": "^1.55.0"
+  }
+}
