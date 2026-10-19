@@ -507,12 +507,12 @@ fonts:
 
 <div class="disclosure-timeline si-disclosure-timeline">
   <div><time>Apr 20, 2025</time><strong>Privately reported the gap</strong></div>
-  <div><time>Apr 20–21, 2025</time><strong>Maintainers authored the PPL-rooted fix</strong></div>
-  <div><time>Feb 1, 2026</time><strong>Rebased fix entered public history</strong></div>
+  <div><time>Apr 21, 2025</time><strong>Maintainer proposed code changes</strong></div>
+  <div><time>Jan 22, 2026</time><strong>Signing account restored; release pending</strong></div>
   <div><time>Aug 29, 2026</time><strong>Signed driver shipped in Release Channel</strong></div>
 </div>
 
-<!-- Dates and scope from the speaker's System Informer disclosure timeline: https://xusheng.dev/posts/byotc/main/ . The initial report was April 20, 2025; maintainer changes were authored during April 20–21 discussions; rebased equivalents entered public repository history February 1, 2026; on August 29, 2026 the maintainer confirmed the updated signed driver shipped in the Release Channel and closed the disclosure loop. -->
+<!-- Original disclosure email: Apr 20, 2025, 14:16 +0800. Johnny Shaw's Apr 21, 2025, 00:48 -0600 reply described changes he had implemented and linked the commits, but the updated signed driver was not yet released. On Jan 22, 2026 he said Microsoft's signing account had been restored and release still required signing and testing. On Aug 29, 2026 he confirmed the updated signed driver shipped in the Release Channel. Gmail thread: https://mail.google.com/mail/u/?authuser=xusheng%40vector35.com#all/19651b14e5b133c0 . -->
 
 ---
 
