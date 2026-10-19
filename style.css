@@ -364,7 +364,7 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .vbox-steps strong { color:var(--aqua); font-size:35px; margin-bottom:12px; }
 .vbox-steps span { font-size:30px; }
 .vbox-code-name { margin-top:58px; color:var(--aqua); font:700 28px/1.2 Menlo,monospace; }
-.vbox-code-label { margin-top:55px; color:var(--aqua); font-size:27px; font-weight:800; }
+.vbox-code-label { margin-top:35px; color:var(--aqua); display:flex; flex-direction:column; gap:5px; font:700 23px/1.2 Menlo,monospace; }
 .vbox-code-block { margin-top:12px; padding:28px 34px; border:3px solid var(--line); border-radius:12px; background:#11202a; font:700 34px/1.35 Menlo,monospace; white-space:pre-wrap; }
 .vbox-code-block code { font:inherit; color:var(--fg); background:transparent; }
 .vbox-handle-flow strong { font-size:33px; }

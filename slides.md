@@ -543,7 +543,7 @@ fonts:
 
 # The Driver Checks Live Handles
 
-<div class="vbox-code-label">Simplified check</div>
+<div class="vbox-code-label"><span>SUPDrv-win.cpp</span><span>supdrvNtProtectRestrictHandlesToProcessAndThread()</span></div>
 <pre class="vbox-code-block"><code>if (handle targets P3 &&
     rights include PROCESS_VM_WRITE)
     verification fails;</code></pre>
