@@ -314,7 +314,7 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-creator-rights { margin-top:60px; font-size:36px; line-height:1.32; font-weight:740; }
 .si-creator-rights strong { color:var(--aqua); }
 .si-creator-access { margin-top:20px; padding:17px 28px; border:3px solid var(--line); border-radius:12px; background:#11202a; }
-.si-creator-access code { color:var(--fg); font:29px/1.55 Menlo,monospace; white-space:nowrap; }
+.si-creator-access code { color:var(--fg); font:24px/1.4 Menlo,monospace; white-space:nowrap; }
 .si-launch-reason { margin-top:25px; color:var(--orange); font-size:28px; font-weight:740; }
 .si-parent-comparison { display:flex; flex-direction:column; gap:58px; margin-top:83px; }
 .si-parent-row { display:flex; align-items:center; gap:15px; }
