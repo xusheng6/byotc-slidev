@@ -316,7 +316,7 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-launch-warning { margin-top:12px; border:3px solid var(--orange); border-radius:12px; background:#11202a; padding:10px 20px; color:var(--fg); font-size:29px; font-weight:740; }
 .si-creator-access { margin-top:12px; padding:12px 20px; border:3px solid var(--line); border-radius:12px; background:#11202a; display:flex; flex-direction:column; gap:5px; }
 .si-creator-access span { color:var(--aqua); font-size:32px; font-weight:740; }
-.si-creator-access code { color:var(--fg); font:28px/1.4 Menlo,monospace; white-space:nowrap; }
+.si-creator-access code { color:var(--fg); font:30px/1.4 Menlo,monospace; white-space:nowrap; }
 .si-parent-comparison { display:flex; flex-direction:column; gap:58px; margin-top:83px; }
 .si-parent-row { display:flex; align-items:center; gap:15px; }
 .si-parent-row div { flex:1; min-width:0; min-height:125px; border:3px solid var(--line); border-radius:12px; background:#11202a; padding:16px 12px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-size:29px; line-height:1.1; font-weight:800; }
