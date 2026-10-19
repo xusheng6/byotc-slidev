@@ -562,6 +562,30 @@ fonts:
 
 ---
 
+# A ROP Chain Across Verification
+
+<div class="vbox-attack-flow"><div><strong>P2</strong><span>Prepares P3's return path</span></div><b>→</b><div><strong>P2</strong><span>Closes its writable handle</span></div><b>→</b><div><strong>P3</strong><span>Passes driver verification</span></div><b>→</b><div><strong>P3</strong><span>Returns into the ROP chain</span></div></div>
+
+<!-- The direct System Informer evil-parent attack cannot retain a writable handle across VirtualBox verification. The speaker's stock-signed VirtualBox 7.2.6a PoC instead arranged attacker-controlled ROP execution in P3 before P3 opened the driver, let the parent close its writable handle, and observed the ROP chain execute after the trust check. This was a code-reuse demonstration using signed-image gadgets, a marker write, and a return to the original continuation. It did not demonstrate arbitrary privileged driver operations. Oracle disclosure S2240975; speaker's January 20 and August 22, 2026 emails. -->
+
+---
+
+# The Handle Closes. Control Survives.
+
+<div class="vbox-attack-contrast"><div><small>At verification</small><strong>No writable parent handle</strong></div><div><small>After verification</small><strong>P3 executes the prepared chain</strong></div></div>
+
+<!-- The check observes live handle rights at the time P3 opens VBoxDrv, not a history of earlier modifications. This makes the sequence a time-of-check/time-of-use issue: attacker-controlled control flow can be staged while P2 still holds its allowed creator handle, then activated after that handle is closed and P3 is verified. Source: SUPDrv-win.cpp supdrvNtProtectRestrictHandlesToProcessAndThread; Oracle S2240975 correspondence. -->
+
+---
+
+# Code Reuse Bridges the Trust Check
+
+<div class="vbox-big-lines"><div>We cannot carry the handle through.</div><div>We carry <span class="aqua">future control flow</span> instead.</div></div>
+
+<!-- The analogy is to exploitation under a no-shellcode constraint: reuse code already present in signed images. Scope: the stock-signed 7.2.6a PoC demonstrated a ROP marker and normal continuation in P3. Later 7.2.16 stack-consistency changes blocked that original stack-based route; a separate stock-signed 7.2.16 PoC used a different route to run code in confirmed P3 and successfully submit trust-gated SUP_IOCTL_GET_PAGING_MODE. These are distinct demonstrations, not evidence that this exact ROP chain worked on 7.2.16, nor a VM escape. Speaker's August 22, 2026 Oracle follow-up, S2240975. -->
+
+---
+
 # Move AV enforcement<br><span class="aqua">out of the kernel?</span>
 
 <div class="hero-sub">The client-to-service boundary still matters.</div>
