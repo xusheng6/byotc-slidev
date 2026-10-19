@@ -533,7 +533,7 @@ fonts:
 
 ---
 
-# P2 Prepares P3, Then the Driver Verifies It
+# Preparation and Verification
 
 <div class="vbox-full-sequence"><div><strong>P2 creates P3</strong><span>Gets a writable handle</span></div><b>→</b><div><strong>P3 waits</strong><span>P2 prepares P3</span></div><b>→</b><div><strong>P2 closes handle</strong><span>Signals P3</span></div><b>→</b><div><strong>P3 opens VBoxDrv</strong><span>Driver verifies P3</span></div></div>
 
@@ -559,46 +559,6 @@ fonts:
 <div class="vbox-contrast"><div>Keep a writable handle?<strong>Verification fails.</strong></div><div>Close it first?<strong>No handle after trust.</strong></div></div>
 
 <!-- The direct evil-parent and evil-grandparent method from System Informer cannot simply carry a writable creator handle into the trusted P3 session. The object callback filters new handles early; the later driver-device open scans for existing powerful handles. This describes the intended barrier, not a claim that VirtualBox is unbreakable. Oracle disclosure S2240975; speaker's January 20, 2026 clarification. -->
-
----
-
-# A signed EXE can run other code
-
-<div class="failure-explainer">Malwarebytes and Antiy trust the <strong>file on disk</strong>.<br>Injected code runs inside that trusted process.</div>
-
-<!-- Malwarebytes mbamchameleon.sys checks the registering process image for a Malwarebytes signature; code injected into genuine MBAM.exe can register and send termination IOCTLs: https://github.com/magicsword-io/LOLDrivers/issues/435 . Antiy AToolsKrnl64.sys validates an Antiy-signed client image; creator-injected code in genuine AToolWTL.exe reaches its termination IOCTL: https://github.com/magicsword-io/LOLDrivers/issues/442 . The slide describes the general image-versus-runtime gap; Malwarebytes was already covered in detail earlier. -->
-
----
-
-# The creator still has handles
-
-<div class="failure-explainer">360 and Huorong classify a <strong>genuine client</strong> as trusted.<br>Its creator can still change what runs inside it.</div>
-
-<!-- 360: the creator retained process-write and primary-thread APC capability after 360FsFlt classified genuine QHSafeMain.exe; the injected client reached 360Box64's sandbox termination path. /Users/xusheng/byotc/results/360_total_security_byotc_poc.md . Huorong: the creator retained enough memory-write authority to replace genuine SysDiag.exe's entry point after classification; the altered client reached HR::ActMon termination. /Users/xusheng/byotc/results/huorong_current_assessment.md . Both dynamic tests targeted only sacrificial children. -->
-
----
-
-# A signed callback can be replayed
-
-<div class="failure-explainer">Avast asks for a <strong>signed callback</strong> and expected stack state.<br>Attacker-controlled code can arrange both.</div>
-
-<!-- In the confirmed Avast 26.8 ARM64 lab chain, authentic overseer.exe began below the needed class, creator-staged private code mapped genuine driver_bridge.dll as SEC_IMAGE, invoked its signed callback with expected stack state, obtained class 4, then used aswArPot.sys to terminate only a sacrificial child. /Users/xusheng/byotc/README.md and https://github.com/magicsword-io/LOLDrivers/issues/438 . This LOLDrivers issue is still open and the research repository flags disclosure status as private; review public presentation scope before presenting technical detail. -->
-
----
-
-# A process name is easy to copy
-
-<div class="failure-explainer">HitmanPro.Alert trusts <strong>LocalSystem</strong> plus the name <strong>hmpalert.exe</strong>.<br>An unrelated program with that name passed a gated query.</div>
-
-<!-- The bounded test ran the same probe as LocalSystem under two filenames. Ordinary name failed; hmpalert.exe succeeded on harmless PID-query IOCTL 0x2222c4. The sensitive cross-process read handler was identified statically but not exercised. /Users/xusheng/byotc/results/hitmanpro_alert_byotc_assessment.md and https://github.com/magicsword-io/LOLDrivers/issues/439 . Open report; do not claim demonstrated memory disclosure. -->
-
----
-
-# Sometimes the gate is missing
-
-<div class="failure-explainer">Panda trusts a <strong>public magic value</strong> written by the caller.<br>Comodo exposes a <strong>process-handle request</strong> directly.</div>
-
-<!-- Panda pskmad.sys 1.1.0.23 accepts a public success constant in a caller-controlled shared section. An unrelated unsigned administrator client forged the exchange and dynamically exercised only a benign self-read; the kernel-read branch is a static finding. /Users/xusheng/byotc/results/panda_current_assessment.md . Comodo ccekrnl.dat 12.2.2.8012 exposes an unrestricted process-handle broker to a sufficiently privileged caller; the bounded lab requested PROCESS_TERMINATE only for a sacrificial child. /Users/xusheng/byotc/results/comodo_current_assessment.md . These are conventional BYOVD, not BYOTC. -->
 
 ---
 
