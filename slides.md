@@ -467,10 +467,10 @@ fonts:
 # Be the Parent
 
 <div class="si-creator-flow"><div class="si-evil">evil.exe</div><section class="si-create-arrow"><span>CreateProcessA</span><b>→</b></section><div class="si-final">SystemInformer.exe</div></div>
-<div class="si-creator-rights">CreateProcessA requests full access; the callback trims it.</div>
-<div class="si-creator-access"><div><span>PROCESS HANDLE</span><code>PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_TERMINATE</code></div><div><span>THREAD HANDLE</span><code>THREAD_RESUME | THREAD_TERMINATE</code></div></div>
+<div class="si-creator-rights">Parent receives <strong>PROCESS_ALL_ACCESS</strong> by default.<br>System Informer still allows:</div>
+<div class="si-creator-access"><code>PROCESS_VM_READ | PROCESS_VM_WRITE<br>PROCESS_VM_OPERATION | PROCESS_TERMINATE</code></div>
 
-<!-- CreateProcess returns creator handles with full access by default, subject to security restrictions: https://learn.microsoft.com/en-us/windows/win32/procthread/process-security-and-access-rights . The affected System Informer Object Manager callback could reduce that mask. Its creator exception added KPH_PROCESS_READ_ACCESS, PROCESS_TERMINATE, PROCESS_VM_OPERATION, PROCESS_VM_WRITE, and for threads KPH_THREAD_READ_ACCESS, THREAD_TERMINATE, THREAD_RESUME. THREAD_SET_CONTEXT was not in this creator exception. These are selected rights, not an exhaustive enumeration of the final handle mask. Source: https://xusheng.dev/posts/byotc/main/ and https://github.com/winsiderss/systeminformer/blob/553d309edb07934bda9387cff29a82ca1714acbb/KSystemInformer/protection.c#L581-L829 . -->
+<!-- CreateProcess returns creator handles with full access by default, subject to security restrictions: https://learn.microsoft.com/en-us/windows/win32/procthread/process-security-and-access-rights . The affected System Informer Object Manager callback could reduce that mask. Its creator exception added KPH_PROCESS_READ_ACCESS (which includes PROCESS_VM_READ), PROCESS_TERMINATE, PROCESS_VM_OPERATION, PROCESS_VM_WRITE. For threads it added KPH_THREAD_READ_ACCESS (including THREAD_GET_CONTEXT), THREAD_TERMINATE, THREAD_RESUME. THREAD_SET_CONTEXT was not in this creator exception. The slide lists selected process rights, not an exhaustive final handle mask. Sources: https://xusheng.dev/posts/byotc/main/ , https://github.com/winsiderss/systeminformer/blob/553d309edb07934bda9387cff29a82ca1714acbb/KSystemInformer/protection.c#L581-L829 , https://github.com/winsiderss/systeminformer/blob/553d309edb07934bda9387cff29a82ca1714acbb/kphlib/include/kphapi.h . -->
 
 ---
 

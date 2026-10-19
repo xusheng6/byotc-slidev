@@ -311,11 +311,10 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-create-arrow b { color:var(--aqua); font-size:57px; line-height:.9; }
 .si-creator-flow .si-evil { color:var(--orange); border-color:var(--orange); }
 .si-creator-flow .si-final { border-color:var(--aqua); }
-.si-creator-rights { margin-top:54px; font-size:31px; line-height:1.25; font-weight:740; }
-.si-creator-access { display:flex; flex-direction:column; gap:14px; margin-top:23px; padding:21px 25px; border:3px solid var(--line); border-radius:12px; background:#11202a; }
-.si-creator-access div { display:flex; align-items:center; gap:24px; }
-.si-creator-access span { width:180px; flex:none; color:var(--aqua); font:20px Menlo,monospace; }
-.si-creator-access code { color:var(--fg); font:22px Menlo,monospace; white-space:nowrap; }
+.si-creator-rights { margin-top:60px; font-size:36px; line-height:1.32; font-weight:740; }
+.si-creator-rights strong { color:var(--aqua); }
+.si-creator-access { margin-top:20px; padding:17px 28px; border:3px solid var(--line); border-radius:12px; background:#11202a; }
+.si-creator-access code { color:var(--fg); font:29px/1.55 Menlo,monospace; white-space:nowrap; }
 .si-parent-comparison { display:flex; flex-direction:column; gap:58px; margin-top:83px; }
 .si-parent-row { display:flex; align-items:center; gap:15px; }
 .si-parent-row div { flex:1; min-width:0; min-height:125px; border:3px solid var(--line); border-radius:12px; background:#11202a; padding:16px 12px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-size:29px; line-height:1.1; font-weight:800; }
