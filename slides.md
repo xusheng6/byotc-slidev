@@ -605,17 +605,9 @@ fonts:
 
 # AI Found a Different Vulnerability
 
-<div class="vbox-attack-flow"><div><strong>7.2.6a</strong><span>AI proved my original report</span></div><b>→</b><div><strong>April patch</strong><span>That route stopped working</span></div><b>→</b><div><strong>7.2.16</strong><span>AI found a different vulnerability</span></div></div>
+<div class="vbox-exploit-lines"><div>P2 changes a writable section of P3's main EXE.</div><div>Verification checks its permissions, but not its contents.</div><div>After verification, P3 uses the altered data and runs attacker code.</div><div>The PoC sends a trust-gated driver request from P3.</div></div>
 
-<!-- The stock-signed 7.2.6a PoC demonstrated the original reported ROP route executing in P3. In the August 22, 2026 follow-up, the speaker said the April return-address and full stack-consistency checks blocked that stack-based route on 7.2.16. A separate 7.2.16 PoC used a different route. These are version-specific demonstrations; the older PoC did not work unchanged on 7.2.16. -->
-
----
-
-# The Gap in Verification
-
-<div class="vbox-two-segments"><div><strong>Checked</strong><span>P3's executable code and section protections</span></div><div><strong>Not byte-compared</strong><span>Writable PE sections of P3's main executable</span></div></div>
-
-<!-- VirtualBox v7.2.16 source, SUPHardenedVerifyProcess-win.cpp around lines 1191–1210: during normal VERIFY_ONLY, the section byte-compare condition includes nonwritable code sections, read-only sections, DLLs, and child purification. It does not include writable sections of the main executable; section protection is checked afterward. Source: https://github.com/VirtualBox/virtualbox/blob/v7.2.16/src/VBox/HostDrivers/Support/win/SUPHardenedVerifyProcess-win.cpp#L1191-L1210 . The August 22, 2026 Oracle follow-up says the separate stock-signed 7.2.16 PoC avoided the protected P3 stack, gained code execution in confirmed P3, and submitted trust-gated SUP_IOCTL_GET_PAGING_MODE via P3's inherited driver session. A restricted-session negative control was denied. The reviewed email does not identify an exact PE section name or describe every causal step from this exclusion to control flow; avoid claiming a specific .data section or exploit chain without the PoC source. -->
+<!-- VirtualBox v7.2.16 source, SUPHardenedVerifyProcess-win.cpp around lines 1191–1210: during normal VERIFY_ONLY, the section byte-compare condition includes nonwritable code sections, read-only sections, DLLs, and child purification, but not writable sections of the main executable. Section protection is checked afterward. Source: https://github.com/VirtualBox/virtualbox/blob/v7.2.16/src/VBox/HostDrivers/Support/win/SUPHardenedVerifyProcess-win.cpp#L1191-L1210 . The August 22, 2026 Oracle follow-up says the separate stock-signed 7.2.16 PoC avoided the protected P3 stack, gained code execution in confirmed P3, and submitted trust-gated SUP_IOCTL_GET_PAGING_MODE via P3's inherited driver session; the restricted-session negative control was denied. The P2 write and delayed effect are the presenter's high-level attack account; the reviewed email does not identify the exact PE section name or fully document the control-flow bridge. Avoid naming a specific .data section without the PoC source. -->
 
 ---
 
