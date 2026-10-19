@@ -425,22 +425,6 @@ fonts:
 
 ---
 
-# Move AV enforcement<br><span class="aqua">out of the kernel?</span>
-
-<div class="hero-sub">The client-to-service boundary still matters.</div>
-
-<!-- Microsoft's WESP preview proposes moving some AV enforcement into user mode. This may reduce some kernel-driver risk, but it does not by itself authenticate a client or protect that client's runtime integrity. This is a design inference, not a claim about a final shipped architecture. Source: https://blogs.windows.com/windowsexperience/2025/11/18/preparing-for-whats-next-windows-security-and-resiliency-innovations-help-organizations-mitigate-risks-recover-faster-and-prepare-for-the-era-of-ai/ -->
-
----
-
-# Questions?
-
-<div class="deck-subtitle">xusheng.dev/posts/byotc/main</div>
-
-<!-- Reserve the remaining ten minutes for Q&A. -->
-
----
-
 # What if the checks are stronger?
 
 <div class="backup-pair">
@@ -580,3 +564,19 @@ fonts:
 <div class="failure-explainer">Panda trusts a <strong>public magic value</strong> written by the caller.<br>Comodo exposes a <strong>process-handle request</strong> directly.</div>
 
 <!-- Panda pskmad.sys 1.1.0.23 accepts a public success constant in a caller-controlled shared section. An unrelated unsigned administrator client forged the exchange and dynamically exercised only a benign self-read; the kernel-read branch is a static finding. /Users/xusheng/byotc/results/panda_current_assessment.md . Comodo ccekrnl.dat 12.2.2.8012 exposes an unrestricted process-handle broker to a sufficiently privileged caller; the bounded lab requested PROCESS_TERMINATE only for a sacrificial child. /Users/xusheng/byotc/results/comodo_current_assessment.md . These are conventional BYOVD, not BYOTC. -->
+
+---
+
+# Move AV enforcement<br><span class="aqua">out of the kernel?</span>
+
+<div class="hero-sub">The client-to-service boundary still matters.</div>
+
+<!-- Microsoft's WESP preview proposes moving some AV enforcement into user mode. This may reduce some kernel-driver risk, but it does not by itself authenticate a client or protect that client's runtime integrity. This is a design inference, not a claim about a final shipped architecture. Source: https://blogs.windows.com/windowsexperience/2025/11/18/preparing-for-whats-next-windows-security-and-resiliency-innovations-help-organizations-mitigate-risks-recover-faster-and-prepare-for-the-era-of-ai/ -->
+
+---
+
+# Questions?
+
+<div class="deck-subtitle">xusheng.dev/posts/byotc/main</div>
+
+<!-- Reserve the remaining ten minutes for Q&A. -->
