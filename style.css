@@ -337,6 +337,10 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-fixed-chain div:nth-of-type(1), .si-fixed-chain div:nth-of-type(2), .si-fixed-chain div:nth-of-type(3), .si-fixed-chain div:nth-of-type(4) { flex:1; }
 .si-fixed-chain .si-root { border-color:var(--aqua); }
 .si-fixed-chain div { font-size:27px; }
+.si-fixed-chain b { position:relative; }
+.si-fixed-chain b span { position:absolute; left:50%; bottom:112px; transform:translateX(-50%); width:130px; color:var(--muted); text-align:center; font-size:18px; line-height:1.1; font-weight:700; }
+.si-ppl-note { margin-top:85px; font-size:38px; font-weight:740; }
+.si-ppl-note strong { color:var(--aqua); }
 .si-family .si-root { border-color:var(--aqua); }
 .vbox-sequence { display:flex; align-items:center; gap:12px; margin-top:110px; }
 .vbox-sequence div { flex:1; min-width:0; border-top:4px solid var(--line); display:flex; flex-direction:column; gap:20px; padding-top:19px; }
