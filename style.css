@@ -334,6 +334,9 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-grandparent b { flex:none; color:var(--aqua); font-size:38px; }
 .si-grandparent .si-evil { border-color:var(--orange); color:var(--orange); }
 .si-grandparent .si-final, .si-grandparent .si-request { border-color:var(--aqua); }
+.si-fixed-chain div:nth-of-type(1), .si-fixed-chain div:nth-of-type(2), .si-fixed-chain div:nth-of-type(3), .si-fixed-chain div:nth-of-type(4) { flex:1; }
+.si-fixed-chain .si-root { border-color:var(--aqua); }
+.si-fixed-chain div { font-size:27px; }
 .si-family .si-root { border-color:var(--aqua); }
 .vbox-sequence { display:flex; align-items:center; gap:12px; margin-top:110px; }
 .vbox-sequence div { flex:1; min-width:0; border-top:4px solid var(--line); display:flex; flex-direction:column; gap:20px; padding-top:19px; }
