@@ -583,30 +583,32 @@ fonts:
 <div class="disclosure-timeline vbox-disclosure-timeline">
   <div><time>Jun 12, 2025</time><strong>I reported the bypass</strong></div>
   <div><time>Dec 22, 2025</time><strong>Six months later, Oracle disputed it</strong></div>
-  <div><time>Jan 2026</time><strong>Oracle asked for a working PoC</strong></div>
+  <div><time>Jan 15, 2026</time><strong>Oracle asked for a working PoC</strong></div>
+  <div><time>Jan–Jun 2026</time><strong>I was too busy to build the ROP chain</strong></div>
+  <div><time>Jun 3, 2026</time><strong>Oracle declined the report</strong></div>
 </div>
 
 <!-- Oracle case S2240975. Original report sent June 12, 2025. Oracle acknowledged receipt that day and assigned a tracking number June 16; its first substantive assessment came December 22, 2025 (roughly six months later) and said the second process could not be controlled by its parent. The speaker clarified the time-of-check/time-of-use and P2→P3 sequence in December 2025 and January 2026. On June 3, 2026 Oracle said it did not consider the report a bug because the material had not demonstrated a feasible way to sustain the attack through the final child. The email says it declined the report, not explicitly that the case was closed. Later, on August 22, 2026, the speaker supplied stock-signed 7.2.6a and 7.2.16 PoCs; Oracle acknowledged the follow-up August 24. Sources: https://mail.google.com/mail/u/?authuser=xusheng%40vector35.com#all/197657d45a82b5ee and https://mail.google.com/mail/u/?authuser=xusheng%40vector35.com#all/19b4bc2aac6047de . -->
 
 ---
 
-# The PoC Was the Hard Part
+# Wait. AI Could Build the PoC.
 
-<div class="vbox-big-lines vbox-story-lines"><div>A working PoC was a fair request.</div><div>Building the ROP chain was <span class="aqua">a lot of work.</span></div><div>June 3, 2026: Oracle declined the report.</div></div>
+<div class="vbox-revelation"></div>
 
-<!-- On January 15, 2026 Oracle asked for a proof of concept because its team did not believe the theory was exploitable. The speaker replied January 16 that the two-parent chain and ROP construction would require substantial effort. The speaker did not complete that PoC then. Oracle declined the report June 3, 2026 because a feasible path through the final child had not been demonstrated. Oracle's email says it declined the report; do not assert a case-closure status beyond that wording. Sources: Oracle S2240975 email threads. -->
-
----
-
-# AI Comes to Help Again
-
-<div class="vbox-big-lines"><div>I realized AI could build the PoC</div><div>and help <span class="aqua">persuade Oracle.</span></div></div>
-
-<!-- The speaker later used AI assistance to build the proof of concept. The August 22, 2026 Oracle follow-up reports a stock-signed VirtualBox 7.2.6a demonstration: attacker-controlled ROP in final P3, a marker write, and return to VirtualBox's original continuation. It used unmodified signed executables and driver. Describe this as AI-assisted research, not as evidence that every step was autonomous. Source: August 22, 2026 follow-up for S2240975. -->
+<!-- Light comic beat. Oracle requested a PoC on January 15, 2026; the speaker replied January 16 that the two-parent chain and ROP construction would require substantial effort. After Oracle declined the report on June 3, the speaker realized AI could help produce the PoC. Original illustration generated for this deck, public/images/ai-epiphany.png. -->
 
 ---
 
-# But the Code Had Changed
+# But the Bug Was Already Patched
+
+<div class="vbox-big-lines"><div>April 2026: VirtualBox added new checks.</div><div>No notice in our <span class="aqua">disclosure thread.</span></div></div>
+
+<!-- The speaker later found April 16, 2026 source commits adding return-address and full stack-consistency checks. The August 22 follow-up says these blocked the original stack-based technique. The reviewed Oracle disclosure thread does not notify the speaker of these changes or credit the report. This supports 'no notice in our disclosure thread,' but not a claim about Oracle's internal reason for the commits or whether the report caused them. -->
+
+---
+
+# April 2026: New Checks
 
 <div class="vbox-hardening"><div><time>Apr 16, 2026 · <a href="https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592">bcfbf910</a></time><strong>Adding return address checks to the hardening code</strong></div><div><time>Apr 16, 2026 · <a href="https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a">6485c4ed</a></time><strong>Added full stack consistency checks</strong></div></div>
 
@@ -614,9 +616,9 @@ fonts:
 
 ---
 
-# AI Proved the Original Route
+# AI Built the Old PoC
 
-<div class="vbox-version-pair"><div><strong>7.2.6a</strong><span>AI built the ROP PoC</span></div><b>→</b><div><strong>7.2.16</strong><span>That route was blocked</span></div></div>
+<div class="vbox-version-pair"><div><strong>7.2.6a</strong><span>ROP PoC worked in P3</span></div><b>→</b><div><strong>7.2.16</strong><span>That route no longer worked</span></div></div>
 
 <!-- The stock-signed 7.2.6a PoC showed ROP execution in P3. In the August 22, 2026 follow-up, the speaker explicitly stated that April return-address and full stack-consistency checks blocked that original route on 7.2.16. This is a version-specific result; it does not show that the overall trust boundary was fixed. -->
 

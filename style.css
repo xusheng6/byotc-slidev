@@ -206,6 +206,10 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .disclosure-timeline strong { font-size:33px; line-height:1.12; }
 .disclosure-timeline > div:last-child { border-left-color:var(--orange); }
 .disclosure-timeline > div:last-child time { color:var(--orange); }
+.vbox-disclosure-timeline { gap:8px; margin-top:28px; }
+.vbox-disclosure-timeline > div { grid-template-columns:220px 1fr; min-height:76px; padding:8px 19px; }
+.vbox-disclosure-timeline time { font-size:22px; }
+.vbox-disclosure-timeline strong { font-size:29px; }
 .si-disclosure-timeline > div { grid-template-columns:270px 1fr; }
 .si-disclosure-timeline time { font-size:22px; }
 .si-disclosure-timeline strong { font-size:31px; }
@@ -381,6 +385,8 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .vbox-attack-contrast small, .vbox-hardening time { color:var(--aqua); font-size:27px; font-weight:800; }
 .vbox-attack-contrast strong, .vbox-hardening strong { margin-top:20px; font-size:36px; line-height:1.14; }
 .vbox-story-lines { margin-top:80px; gap:33px; font-size:46px; }
+.vbox-revelation { position:absolute; inset:0; background:url('/images/ai-epiphany.png') center/cover no-repeat; }
+.slidev-layout:has(.vbox-revelation) h1 { position:relative; z-index:1; max-width:570px; font-size:63px; line-height:1.1; margin-top:165px; text-shadow:0 4px 18px #06101a; }
 .vbox-hardening a { color:var(--aqua); text-decoration:underline; text-underline-offset:5px; }
 .vbox-version-pair div { text-align:center; align-items:center; }
 .vbox-version-pair strong { color:var(--aqua); font-size:48px; }
