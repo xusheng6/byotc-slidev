@@ -44,13 +44,12 @@ fonts:
 
 ---
 
-<div class="variant-statement">
-  <div>Bring Your Own Trusted Caller (BYOTC)</div>
-  <div>shares a playbook with</div>
+<div class="variant-statement recap-statement">
+  <div>First, a recap:</div>
   <div>Bring Your Own Vulnerable Driver (BYOVD)</div>
 </div>
 
-<!-- Set up the conceptual relationship before explaining BYOVD. Both attacks reuse a trusted component to reach a privileged driver operation, but their mechanisms and trust boundaries differ. -->
+<!-- Introduce the full BYOVD name before its definition and attack sequence. Define BYOTC only after the access-control slide. -->
 
 ---
 
@@ -192,6 +191,18 @@ fonts:
 </div>
 
 <!-- Conceptual model. The driver should authorize the requested operation, not merely assume any caller that can open the device is trusted. This sets up the next section: caller checks can themselves rely on spoofable or controllable trust signals. -->
+
+---
+
+# Bring Your Own Trusted Caller (BYOTC)
+
+<div class="byotc-definition">
+  <div>Bring the client the driver already trusts.</div>
+  <div>Run your code inside that client.</div>
+  <div>The driver accepts its privileged request.</div>
+</div>
+
+<!-- Definition: attackers obtain code execution inside the user-mode program that the driver trusts, then use it to invoke the privileged driver interface. The caller identity check succeeds even though the request now carries attacker intent. Source: https://xusheng.dev/posts/byotc/main/ -->
 
 ---
 

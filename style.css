@@ -29,9 +29,12 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .variant-statement { display:flex; flex-direction:column; gap:44px; margin-top:118px; color:var(--fg); font-weight:800; line-height:1.15; white-space:nowrap; }
 .variant-statement div:first-child, .variant-statement div:last-child { font-size:48px; }
 .variant-statement div:nth-child(2) { font-size:36px; }
+.recap-statement div:nth-child(2) { font-size:48px; }
 .byovd-title { font-size:48px !important; letter-spacing:-.03em; white-space:nowrap; }
 .byovd-definition { display:flex; flex-direction:column; gap:33px; margin-top:68px; max-width:1080px; font-size:41px; font-weight:700; line-height:1.2; }
 .byovd-definition div:last-child { color:var(--aqua); }
+.byotc-definition { display:flex; flex-direction:column; gap:34px; margin-top:115px; font-size:47px; font-weight:700; line-height:1.2; }
+.byotc-definition div:last-child { color:var(--aqua); }
 .byovd-steps { display:flex; flex-direction:column; gap:16px; margin-top:60px; }
 .byovd-steps > div { min-height:135px; display:flex; align-items:center; gap:33px; padding:17px 25px; border:2px solid var(--line); border-radius:10px; background:#11202a; }
 .byovd-steps b { color:var(--aqua); font-size:50px; width:55px; flex:none; }
