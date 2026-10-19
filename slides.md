@@ -425,14 +425,16 @@ fonts:
 
 ---
 
-# What if the checks are stronger?
+# Open Source
+
+<div class="open-source-setup">These tools protect access to their drivers.<br><strong>Both protections can still be bypassed.</strong></div>
 
 <div class="backup-pair">
   <div>System Informer</div>
   <div>VirtualBox</div>
 </div>
 
-<!-- Optional case-study sequence. These products use more than a simple executable-name or signer check. System Informer has public analysis and a shipped fix: https://xusheng.dev/posts/byotc/main/ . The VirtualBox case is documented in Oracle disclosure S2240975 and the speaker's August 22, 2026 follow-up; use only within the speaker's disclosure plan. -->
+<!-- Transition to two open-source case studies. Both products use more than a simple executable-name or signer check, but the demonstrated paths still cross their trust boundaries. System Informer has public analysis and a shipped fix: https://xusheng.dev/posts/byotc/main/ . The VirtualBox case is documented in Oracle disclosure S2240975 and the speaker's August 22, 2026 follow-up; use only within the speaker's disclosure plan. -->
 
 ---
 
