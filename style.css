@@ -328,7 +328,9 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-parent-row:last-child b { color:var(--orange); }
 .si-grandparent { display:flex; align-items:center; gap:12px; margin-top:130px; }
 .si-grandparent div { flex:1; min-width:0; min-height:155px; border:3px solid var(--line); border-radius:12px; background:#11202a; padding:17px 11px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-size:27px; line-height:1.12; font-weight:800; }
-.si-grandparent div:nth-of-type(2), .si-grandparent div:nth-of-type(3) { font-family:"Arial Narrow",Arial,sans-serif; font-size:24px; }
+.si-grandparent div:nth-of-type(1) { flex:.7; }
+.si-grandparent div:nth-of-type(2), .si-grandparent div:nth-of-type(3) { flex:1.35; }
+.si-grandparent div:nth-of-type(4) { flex:.9; }
 .si-grandparent b { flex:none; color:var(--aqua); font-size:38px; }
 .si-grandparent .si-evil { border-color:var(--orange); color:var(--orange); }
 .si-grandparent .si-final, .si-grandparent .si-request { border-color:var(--aqua); }
