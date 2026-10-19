@@ -597,6 +597,7 @@ fonts:
 <div class="vbox-patch-reveal">But the bug was already patched in <span class="aqua">April 2026.</span></div>
 <div class="vbox-commit-lines"><div><a href="https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592">bcfbf910</a><span>Return-address checks</span></div><div><a href="https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a">6485c4ed</a><span>Full stack-consistency checks</span></div></div>
 <div class="vbox-no-notice">I was not acknowledged or notified.</div>
+<div class="vbox-daybreak">Codex with Daybreak happily made the PoC. Too late for that route.</div>
 
 <!-- After Oracle declined the report, the speaker realized AI could help build the requested PoC. Public source commits bcfbf910d779b927a94dbb5d82b6527664093592 and 6485c4edbb37dd133c14f3f561c6eab69979000a, authored April 16, 2026, added return-address and full stack-consistency checks. The speaker's August 22 follow-up says these blocked the original stack-based route. The correspondence reviewed does not tie the commits to S2240975 or explain Oracle's reason for them. No notice of these changes appeared in that disclosure thread. Sources: https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592 and https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a . -->
 
@@ -610,19 +611,11 @@ fonts:
 
 ---
 
-# The New PoC Reached P3
+# The Gap in Verification
 
-<div class="vbox-big-lines"><div>Code ran in <span class="aqua">verified P3.</span></div><div>A trust-gated driver request succeeded.</div></div>
+<div class="vbox-two-segments"><div><strong>Checked</strong><span>P3's executable code and section protections</span></div><div><strong>Not byte-compared</strong><span>Writable PE sections of P3's main executable</span></div></div>
 
-<!-- The separate stock-signed 7.2.16 PoC avoided the protected P3 stack, achieved code execution in confirmed P3, and submitted trust-gated SUP_IOCTL_GET_PAGING_MODE through P3's inherited driver session. A restricted-session negative control was denied. This demonstrates that one trust-gated driver request was serviced, not arbitrary driver commands, process termination, or VM escape. Oracle acknowledged receipt August 24, 2026; no later vendor resolution is established here. Source: speaker's August 22, 2026 S2240975 follow-up. -->
-
----
-
-# The New Bypass
-
-<div class="vbox-attack-flow"><div><strong>P3 passes</strong><span>the trust check</span></div><b>→</b><div><strong>Writable state</strong><span>remains outside the checked stack</span></div><b>→</b><div><strong>P3 sends</strong><span>a privileged driver request</span></div></div>
-
-<!-- This is a deliberately high-level diagram pending the exact section and symbol from the PoC source. The August 22, 2026 Oracle follow-up establishes that the 7.2.16 route avoids the protected P3 stack, gains code execution in confirmed P3, and successfully submits trust-gated SUP_IOCTL_GET_PAGING_MODE through P3's inherited driver session; the negative-control restricted session is denied. The email does not identify the particular writable section. Do not name or quote one without the PoC source. -->
+<!-- VirtualBox v7.2.16 source, SUPHardenedVerifyProcess-win.cpp around lines 1191–1210: during normal VERIFY_ONLY, the section byte-compare condition includes nonwritable code sections, read-only sections, DLLs, and child purification. It does not include writable sections of the main executable; section protection is checked afterward. Source: https://github.com/VirtualBox/virtualbox/blob/v7.2.16/src/VBox/HostDrivers/Support/win/SUPHardenedVerifyProcess-win.cpp#L1191-L1210 . The August 22, 2026 Oracle follow-up says the separate stock-signed 7.2.16 PoC avoided the protected P3 stack, gained code execution in confirmed P3, and submitted trust-gated SUP_IOCTL_GET_PAGING_MODE via P3's inherited driver session. A restricted-session negative control was denied. The reviewed email does not identify an exact PE section name or describe every causal step from this exclusion to control flow; avoid claiming a specific .data section or exploit chain without the PoC source. -->
 
 ---
 

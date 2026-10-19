@@ -385,6 +385,11 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .vbox-commit-lines div { display:flex; gap:30px; padding:15px 20px; border-left:4px solid var(--aqua); background:#11202a; font-size:27px; font-weight:760; }
 .vbox-commit-lines a { color:var(--aqua); font-family:Menlo,monospace; text-decoration:underline; text-underline-offset:4px; }
 .vbox-no-notice { margin-top:35px; font-size:32px; font-weight:800; }
+.vbox-daybreak { margin-top:14px; font-size:27px; font-weight:750; }
+.vbox-two-segments { display:grid; grid-template-columns:1fr 1fr; gap:64px; margin-top:125px; }
+.vbox-two-segments > div { border-top:5px solid var(--aqua); padding-top:25px; display:flex; flex-direction:column; gap:24px; }
+.vbox-two-segments strong { color:var(--aqua); font-size:39px; }
+.vbox-two-segments span { font-size:38px; line-height:1.16; font-weight:800; }
 .vbox-sequence { display:flex; align-items:center; gap:12px; margin-top:110px; }
 .vbox-sequence div { flex:1; min-width:0; border-top:4px solid var(--line); display:flex; flex-direction:column; gap:20px; padding-top:19px; }
 .vbox-sequence strong { color:var(--aqua); font-size:44px; }
