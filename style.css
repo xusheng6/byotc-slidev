@@ -348,6 +348,24 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-ppl-note { margin-top:55px; display:flex; flex-direction:column; gap:11px; font-size:34px; line-height:1.2; font-weight:740; }
 .si-ppl-note strong { color:var(--aqua); }
 .si-family .si-root { border-color:var(--aqua); }
+.vbox-big-lines { display:flex; flex-direction:column; gap:42px; margin-top:115px; font-size:53px; line-height:1.1; font-weight:800; }
+.vbox-process-chain, .vbox-steps, .vbox-handle-flow { display:flex; align-items:center; gap:15px; margin-top:105px; }
+.vbox-process-chain div, .vbox-steps div, .vbox-handle-flow div { flex:1; min-width:0; min-height:155px; padding:21px; border:3px solid var(--line); border-radius:12px; background:#11202a; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; font-size:32px; line-height:1.16; font-weight:800; }
+.vbox-process-chain .si-final { border-color:var(--aqua); }
+.vbox-process-chain small, .vbox-handle-flow small { display:block; margin-bottom:9px; color:var(--muted); font-size:26px; }
+.vbox-process-chain b, .vbox-steps b, .vbox-handle-flow b { flex:none; color:var(--aqua); font-size:43px; }
+.vbox-subline { margin-top:53px; font-size:35px; font-weight:760; }
+.vbox-steps strong { color:var(--aqua); font-size:35px; margin-bottom:12px; }
+.vbox-steps span { font-size:30px; }
+.vbox-code-name { margin-top:58px; color:var(--aqua); font:700 28px/1.2 Menlo,monospace; }
+.vbox-code-label { margin-top:55px; color:var(--aqua); font-size:27px; font-weight:800; }
+.vbox-code-block { margin-top:12px; padding:28px 34px; border:3px solid var(--line); border-radius:12px; background:#11202a; font:700 34px/1.35 Menlo,monospace; white-space:pre-wrap; }
+.vbox-code-block code { font:inherit; color:var(--fg); background:transparent; }
+.vbox-handle-flow strong { font-size:33px; }
+.vbox-code-caption { margin-top:28px; font-size:31px; font-weight:760; }
+.vbox-contrast { display:flex; flex-direction:column; gap:28px; margin-top:86px; }
+.vbox-contrast div { padding:24px 30px; border:3px solid var(--line); border-radius:12px; background:#11202a; font-size:36px; font-weight:780; }
+.vbox-contrast strong { float:right; color:var(--aqua); }
 .vbox-sequence { display:flex; align-items:center; gap:12px; margin-top:110px; }
 .vbox-sequence div { flex:1; min-width:0; border-top:4px solid var(--line); display:flex; flex-direction:column; gap:20px; padding-top:19px; }
 .vbox-sequence strong { color:var(--aqua); font-size:44px; }

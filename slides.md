@@ -516,35 +516,68 @@ fonts:
 
 ---
 
-# VirtualBox hardens the VM process
+# VirtualBox Chooses a Different Design
 
-<div class="backup-statement">A trusted VM process gets a <span class="aqua">privileged driver session.</span></div>
+<div class="vbox-big-lines"><div>Launch and prepare the child.</div><div><span class="aqua">Then</span> verify it for driver access.</div></div>
 
-<!-- Oracle VirtualBox's Windows process-hardening design validates the final hardened process (P3) before it obtains the privileged VBoxDrv session. The related disclosure is Oracle S2240975, initially reported June 12, 2025. See the speaker's August 22, 2026 follow-up email with stock-signed 7.2.6a and 7.2.16 PoCs. Do not conflate this with a generic VirtualBox VM escape. -->
-
----
-
-# VirtualBox also uses a chain
-
-<div class="si-family"><div>Launcher<br><small>P1</small></div><b>→</b><div>Hardened child<br><small>P2</small></div><b>→</b><div class="si-final">Final VM process<br><small>P3 · trusted session</small></div></div>
-
-<!-- Simplified P1→P2→P3 startup described in Oracle S2240975 correspondence. The final P3 is the process that obtains the privileged driver session. The August 2026 PoC crossed this trust boundary on stock signed releases. The labels are explanatory, not literal process names. -->
+<!-- Protection of new handles starts during process creation, but final trust is decided later, when the child opens the driver device. The distinction is between early handle filtering and later integrity verification, not an unprotected launch. Source: VirtualBox src/VBox/HostDrivers/Support/win/SUPDrv-win.cpp, VBoxDrvNtCreate and supdrvNtProtectVerifyProcess; Oracle disclosure S2240975. -->
 
 ---
 
-# The handle disappears; the change remains
+# Three Processes, Two Respawns
 
-<div class="vbox-sequence"><div><strong>1</strong><span>Parent changes child</span></div><b>→</b><div><strong>2</strong><span>Parent closes handle</span></div><b>→</b><div><strong>3</strong><span>Driver validates child</span></div></div>
+<div class="vbox-process-chain"><div>Launcher<small>P1</small></div><b>→</b><div>Hardened stub<small>P2</small></div><b>→</b><div class="si-final">VM process<small>P3</small></div></div>
+<div class="vbox-subline">Only P3 receives the privileged driver session.</div>
 
-<!-- Simplified VirtualBox S2240975 sequence. The product's creator exception allowed PROCESS_VM_WRITE for startup; the parent used that handle before the final child opened \\Device\\VBoxDrv, then closed it. Validation observed the signed image and no dangerous live handle, while attacker-controlled data/control flow remained. Windows itself does not require a parent to have VM_WRITE merely to create a child; this was corrected in the speaker's January 21, 2026 Oracle email. The full demonstration used code reuse rather than modifying signed executable pages. -->
+<!-- P1→P2→P3 is the speaker's notation from the January 20, 2026 Oracle email. In source, supR3HardenedWinReSpawn performs two respawns; the stub opens VBoxDrvStub and final VM process opens VBoxDrv. Labels are roles, not three different executable filenames. https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPR3HardenedMain-win.cpp -->
 
 ---
 
-# Validation passed. Control survived.
+# The Child Waits for Its Parent
 
-<div class="vbox-outcome"><div>Hardened VM process<br><small>attacker-controlled code</small></div><b>→</b><div>Trusted driver request<br><small>accepted</small></div></div>
+<div class="vbox-steps"><div><strong>P2</strong><span>Creates P3</span></div><b>→</b><div><strong>P3</strong><span>Signals “ready”<br>and waits</span></div><b>→</b><div><strong>P2</strong><span>Purifies P3</span></div></div>
+<div class="vbox-code-name">supR3HardNtChildPurify()</div>
 
-<!-- Bounded demonstrated result: the speaker's August 22, 2026 follow-up reported stock signed VirtualBox 7.2.6a ROP in P3; 7.2.16's added stack checks blocked that original route, but a separate stock-signed 7.2.16 PoC achieved code execution in confirmed P3 and sent SUP_IOCTL_GET_PAGING_MODE through the inherited driver session. A restricted-session negative control was denied. This is a trust-gated paging-mode query, not proof of arbitrary privileged driver operations or VM escape. Oracle acknowledged the follow-up on August 24, 2026; no vendor fix confirmation was found in the checked thread. Disclosure reference S2240975. -->
+<!-- P3's supR3HardenedEarlyProcessInit signals kSupR3WinChildReq_PurifyChildAndCloseHandles, then waits on hEvtChild. P2 handles this in supR3HardenedWinDoReSpawn: supR3HardNtChildWaitFor, supR3HardNtChildPurify, supR3HardNtChildSanitizePeb. This sequence repeats for each respawn; the slide zooms into P2→P3. https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPR3HardenedMain-win.cpp -->
+
+---
+
+# Close the Powerful Handle
+
+<div class="vbox-handle-flow"><div><small>P2 starts with</small><strong>Writable handle to P3</strong></div><b>→</b><div><small>P2 keeps only</small><strong>Restricted handle</strong></div></div>
+<div class="vbox-code-name">supR3HardNtChildCloseFullAccessHandles()</div>
+
+<!-- Source: supR3HardNtChildCloseFullAccessHandles duplicates pThis->hProcess with restricted rights, then NtClose(pThis->hProcess), replacing it with the restricted handle; closes the original thread handle too. Name says full access, but on current Windows the creator exception can yield a handle including PROCESS_VM_WRITE rather than literal PROCESS_ALL_ACCESS. Driver callback: supdrvNtProtectCallback_ProcessHandlePre. https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPR3HardenedMain-win.cpp ; https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPDrv-win.cpp -->
+
+---
+
+# Then P3 Asks for Trust
+
+<div class="vbox-steps"><div><strong>P2</strong><span>Closes handle<br>and signals</span></div><b>→</b><div><strong>P3</strong><span>Opens<br>VBoxDrv device</span></div><b>→</b><div><strong>Driver</strong><span>Verifies P3</span></div></div>
+<div class="vbox-code-name">VBoxDrvNtCreate() → supdrvNtProtectVerifyProcess()</div>
+
+<!-- In supR3HardenedWinDoReSpawn, P2 calls supR3HardNtChildCloseFullAccessHandles, then NtSetEvent(This.hEvtChild). P3 resumes in supR3HardenedEarlyProcessInit and opens the driver. VBoxDrvNtCreate handles the open; for a VmProcessUnconfirmed it calls supdrvNtProtectVerifyProcess before creating the privileged session. The verification includes live handle, process/image, parent, and token checks. Source: https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPR3HardenedMain-win.cpp and https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPDrv-win.cpp -->
+
+---
+
+# The Driver Checks Live Handles
+
+<div class="vbox-code-label">Simplified check</div>
+<pre class="vbox-code-block"><code>if (handle targets P3 &&
+    rights include PROCESS_VM_WRITE)
+    verification fails;</code></pre>
+
+<div class="vbox-code-caption">A writable parent handle must be gone before verification.</div>
+
+<!-- Slide code is explanatory pseudocode, not a verbatim excerpt. supdrvNtProtectRestrictHandlesToProcessAndThread in SUPDrv-win.cpp scans SystemExtendedHandleInformation and counts handles to the protected process whose GrantedAccess intersects SUPDRV_NT_EVIL_PROCESS_RIGHTS. The real code exempts handles within the protected process, a bounded CSRSS handle, and certain System handles, and also checks the primary thread and inheritable handles. SUPDRV_NT_EVIL_PROCESS_RIGHTS includes PROCESS_VM_WRITE, PROCESS_VM_OPERATION, and other dangerous rights. This is a current-state handle check, not a history of past writes. https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPDrv-win.cpp -->
+
+---
+
+# Why the Earlier Attack Fails Here
+
+<div class="vbox-contrast"><div>Keep a writable handle?<strong>Verification fails.</strong></div><div>Close it first?<strong>No handle after trust.</strong></div></div>
+
+<!-- The direct evil-parent and evil-grandparent method from System Informer cannot simply carry a writable creator handle into the trusted P3 session. The object callback filters new handles early; the later driver-device open scans for existing powerful handles. This describes the intended barrier, not a claim that VirtualBox is unbreakable. Oracle disclosure S2240975; speaker's January 20, 2026 clarification. -->
 
 ---
 
