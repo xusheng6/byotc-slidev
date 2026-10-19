@@ -488,7 +488,7 @@ fonts:
 
 # So be the grandparent
 
-<div class="si-grandparent"><div class="si-evil">evil.exe</div><b>→</b><div>SystemInformer.exe<small>HIGH · controlled</small></div><b>→</b><div class="si-final">SystemInformer.exe<small>MAXIMUM · controlled</small></div><b>→</b><div class="si-request">Privileged request</div></div>
+<div class="si-grandparent"><div class="si-evil">evil.exe</div><b>→</b><div>SystemInformer.exe<small>HIGH</small></div><b>→</b><div class="si-final">SystemInformer.exe<small>MAXIMUM</small></div><b>→</b><div class="si-request">Privileged request</div></div>
 
 <!-- The attacker creates the genuine intermediate System Informer instance and changes it through the retained creator handle. That altered HIGH process creates the genuine final instance; its creator handle can change the MAXIMUM child. Both images can still pass on-disk verification. This was the reported evil-parent chain; present it as the affected pre-fix design. Source: https://xusheng.dev/posts/byotc/main/ . -->
 
