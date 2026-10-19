@@ -455,12 +455,12 @@ fonts:
 
 ---
 
-# The client is protected
+# Protecting the client
 
-<div class="si-protection"><div class="si-outsider">Other process</div><b>✕</b><div class="si-protected">SystemInformer.exe</div></div>
-<div class="backup-statement compact">The driver blocks new handles that could change it.</div>
+<div class="si-handle-filter"><div>Other process</div><b>→</b><div class="si-filter">Object Manager callback<small>ObRegisterCallbacks</small></div><b>→</b><div class="si-protected">SystemInformer.exe</div></div>
+<div class="si-filter-result">New process / thread handles lose <strong>memory-write</strong> and <strong>thread-control</strong> rights.</div>
 
-<!-- Object Manager callbacks strip dangerous rights, including memory-write and thread-control rights, from handles opened by outside processes. This is a simplified depiction. The creator-handle exception is introduced next. Source: https://xusheng.dev/posts/byotc/main/ . -->
+<!-- System Informer registers Object Manager pre-operation callbacks with ObRegisterCallbacks. Its KphApplyObProtections filters requested access on process/thread handle creation or duplication, stripping dangerous rights from outside callers. This is a simplified depiction; the creator-handle exception follows. Source: https://xusheng.dev/posts/byotc/main/ and https://github.com/winsiderss/systeminformer/blob/553d309edb07934bda9387cff29a82ca1714acbb/KSystemInformer/protection.c#L623-L829 . Microsoft API: https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-obregistercallbacks . -->
 
 ---
 

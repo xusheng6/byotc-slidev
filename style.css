@@ -288,10 +288,14 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-levels { display:flex; gap:13px; align-items:center; margin-top:105px; }
 .si-levels span, .si-levels strong { flex:1; min-width:0; padding:22px 8px; border:2px solid var(--line); border-radius:10px; text-align:center; font-size:23px; font-weight:800; }
 .si-levels strong { color:var(--bg); background:var(--aqua); border-color:var(--aqua); }
-.si-protection { display:flex; align-items:center; justify-content:center; gap:40px; margin-top:85px; }
-.si-protection div { border:3px solid var(--line); border-radius:11px; min-width:350px; padding:42px 25px; text-align:center; font-size:36px; font-weight:800; }
-.si-protection .si-protected { border-color:var(--aqua); }
-.si-protection b { color:var(--orange); font-size:82px; line-height:1; }
+.si-handle-filter { display:flex; align-items:center; gap:14px; margin-top:95px; }
+.si-handle-filter div { flex:1; min-width:0; border:3px solid var(--line); border-radius:11px; padding:37px 13px; text-align:center; font-size:29px; font-weight:800; }
+.si-handle-filter .si-filter { flex:1.25; border-color:var(--orange); }
+.si-handle-filter .si-protected { border-color:var(--aqua); }
+.si-handle-filter small { display:block; margin-top:13px; color:var(--orange); font:21px Menlo,monospace; }
+.si-handle-filter b { flex:none; color:var(--aqua); font-size:43px; }
+.si-filter-result { margin-top:75px; font-size:38px; line-height:1.25; font-weight:740; }
+.si-filter-result strong { color:var(--aqua); }
 .si-chain, .si-family, .vbox-outcome { display:flex; align-items:center; gap:20px; margin-top:112px; }
 .si-chain div, .si-family div, .vbox-outcome div { flex:1; min-width:0; border-top:4px solid var(--line); padding-top:21px; font-size:34px; line-height:1.17; font-weight:800; }
 .si-chain b, .si-family b, .vbox-outcome b { flex:none; color:var(--aqua); font-size:42px; }
