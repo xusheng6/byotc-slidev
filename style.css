@@ -345,7 +345,7 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-fixed-chain .si-service-step { border-color:var(--orange); }
 .si-fixed-chain div { min-height:150px; padding:13px 7px; font-size:26px; }
 .si-fixed-chain b { font-size:31px; }
-.si-ppl-note { margin-top:85px; font-size:38px; font-weight:740; }
+.si-ppl-note { margin-top:55px; display:flex; flex-direction:column; gap:11px; font-size:34px; line-height:1.2; font-weight:740; }
 .si-ppl-note strong { color:var(--aqua); }
 .si-family .si-root { border-color:var(--aqua); }
 .vbox-sequence { display:flex; align-items:center; gap:12px; margin-top:110px; }
