@@ -496,7 +496,7 @@ fonts:
 
 # The Fix Relies on PPL
 
-<div class="si-grandparent si-fixed-chain"><div>System<br>Informer.exe<small>LOW</small></div><b><span>starts service</span>→</b><div class="si-root">services.exe<small>PPL</small></div><b><span>creates process</span>→</b><div>System<br>Informer.exe<small>HIGH</small></div><b><span>creates process</span>→</b><div class="si-final">System<br>Informer.exe<small>MAXIMUM</small></div></div>
+<div class="si-grandparent si-fixed-chain"><div>System<br>Informer<small>LOW</small></div><b>→</b><div class="si-service-step">Create<br>service</div><b>→</b><div class="si-root">services.exe<small>PPL</small></div><b>→</b><div>System<br>Informer<small>HIGH</small></div><b>→</b><div class="si-final">System<br>Informer<small>MAXIMUM</small></div></div>
 <div class="si-ppl-note">Windows enforces PPL protection around <strong>services.exe.</strong></div>
 
 <!-- The weaker System Informer instance creates and starts a temporary service. The service path runs through services.exe, a WinTcb-protected PPL, which creates the HIGH instance; that instance creates the MAXIMUM one. svchost.exe is not the creator in the reported chain. The slide simplifies the first instance as LOW. The fix roots secure creation in a protected services.exe process rather than letting an ordinary administrator manufacture the chain. It also prevents handle duplication across the verified-process boundary. The maintainer confirmed on August 29, 2026 that the updated signed driver shipped in the Release Channel. Source: https://xusheng.dev/posts/byotc/main/ and the System Informer maintainer's August 29, 2026 email in the disclosure thread. -->

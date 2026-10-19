@@ -334,11 +334,12 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-grandparent b { flex:none; color:var(--aqua); font-size:38px; }
 .si-grandparent .si-evil { border-color:var(--orange); color:var(--orange); }
 .si-grandparent .si-final, .si-grandparent .si-request { border-color:var(--aqua); }
-.si-fixed-chain div:nth-of-type(1), .si-fixed-chain div:nth-of-type(2), .si-fixed-chain div:nth-of-type(3), .si-fixed-chain div:nth-of-type(4) { flex:1; }
+.si-fixed-chain { gap:9px; margin-top:120px; }
+.si-fixed-chain div:nth-of-type(1), .si-fixed-chain div:nth-of-type(2), .si-fixed-chain div:nth-of-type(3), .si-fixed-chain div:nth-of-type(4), .si-fixed-chain div:nth-of-type(5) { flex:1; }
 .si-fixed-chain .si-root { border-color:var(--aqua); }
-.si-fixed-chain div { font-size:27px; }
-.si-fixed-chain b { position:relative; }
-.si-fixed-chain b span { position:absolute; left:50%; bottom:112px; transform:translateX(-50%); width:130px; color:var(--muted); text-align:center; font-size:18px; line-height:1.1; font-weight:700; }
+.si-fixed-chain .si-service-step { border-color:var(--orange); }
+.si-fixed-chain div { min-height:150px; padding:13px 7px; font-size:26px; }
+.si-fixed-chain b { font-size:31px; }
 .si-ppl-note { margin-top:85px; font-size:38px; font-weight:740; }
 .si-ppl-note strong { color:var(--aqua); }
 .si-family .si-root { border-color:var(--aqua); }
