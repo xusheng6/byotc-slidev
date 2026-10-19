@@ -464,26 +464,29 @@ fonts:
 
 ---
 
-# MAXIMUM needs a trusted parent
+# The creator already has a handle
 
-<div class="si-chain"><div>SystemInformer.exe<br><small>HIGH</small></div><b>→</b><div class="si-final">SystemInformer.exe<br><small>MAXIMUM</small></div><b>→</b><div>Privileged request</div></div>
+<div class="si-creator-flow"><div class="si-evil">Creator</div><b>→</b><div class="si-final">Protected child</div></div>
+<div class="si-creator-rights">Under the affected rule, its handle keeps <strong>memory-write rights.</strong></div>
 
-<!-- This is the old secure-creation rule: a HIGH System Informer instance could create a child that was promoted to MAXIMUM after the other integrity checks passed. Only the final MAXIMUM process could send KphMsgTerminateProcess. Source: https://xusheng.dev/posts/byotc/main/ . -->
+<!-- Under the affected System Informer design, KphpShouldPermitCreatorProcess allowed the actual creator PROCESS_VM_OPERATION and PROCESS_VM_WRITE, even while the object callback blocked later outsiders. The handle is obtained during process creation and remains usable. This is not a claim that CreateProcess universally requires VM_WRITE, or that every creator handle is unrestricted. Source: https://xusheng.dev/posts/byotc/main/ and https://github.com/winsiderss/systeminformer/blob/553d309edb07934bda9387cff29a82ca1714acbb/KSystemInformer/protection.c#L581-L621 . -->
 
 ---
 
-# But the creator keeps its handle
+# MAXIMUM needs a trusted parent
 
-<div class="si-chain two"><div class="si-evil">Creator</div><b>→</b><div class="si-final">Protected child</div></div>
-<div class="backup-statement compact">That existing handle can still write to the child.</div>
+<div class="si-parent-comparison">
+  <div class="si-parent-row"><div>SystemInformer.exe<small>HIGH</small></div><b>→</b><div>SystemInformer.exe<small>MAXIMUM</small></div><b>→</b><div class="si-allowed">Privileged request</div></div>
+  <div class="si-parent-row"><div class="si-evil">evil.exe</div><b>→</b><div>SystemInformer.exe<small>not MAXIMUM</small></div><b>✕</b><div class="si-denied">Request denied</div></div>
+</div>
 
-<!-- Under the affected System Informer design, KphpShouldPermitCreatorProcess allowed the actual creator PROCESS_VM_OPERATION and PROCESS_VM_WRITE, even while the object callback blocked later outsiders. The handle is obtained during process creation and remains usable. Do not claim Windows universally requires VM_WRITE for CreateProcess: the January 2026 correspondence with the maintainer discusses product compatibility and the related VirtualBox report explicitly corrected that misconception. Source: https://xusheng.dev/posts/byotc/main/ . -->
+<!-- In the affected pre-fix rule, a genuine HIGH System Informer instance could create a child eligible for MAXIMUM after the other checks passed. A direct child of evil.exe could not reach MAXIMUM and therefore could not send KphMsgTerminateProcess. This comparison isolates the secure-creation requirement; the creator-handle weakness was shown on the previous slide. Source: https://xusheng.dev/posts/byotc/main/ . -->
 
 ---
 
 # So be the grandparent
 
-<div class="si-family"><div class="si-evil">Attacker</div><b>→</b><div>System Informer<br><small>HIGH · altered</small></div><b>→</b><div class="si-final">System Informer<br><small>MAXIMUM · altered</small></div></div>
+<div class="si-grandparent"><div class="si-evil">evil.exe</div><b>→</b><div>SystemInformer.exe<small>HIGH · controlled</small></div><b>→</b><div class="si-final">SystemInformer.exe<small>MAXIMUM · controlled</small></div><b>→</b><div class="si-request">Privileged request</div></div>
 
 <!-- The attacker creates the genuine intermediate System Informer instance and changes it through the retained creator handle. That altered HIGH process creates the genuine final instance; its creator handle can change the MAXIMUM child. Both images can still pass on-disk verification. This was the reported evil-parent chain; present it as the affected pre-fix design. Source: https://xusheng.dev/posts/byotc/main/ . -->
 
