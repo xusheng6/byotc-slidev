@@ -543,14 +543,14 @@ fonts:
 
 # The Driver Checks Live Handles
 
-<div class="vbox-code-label"><span>SUPDrv-win.cpp</span><span>supdrvNtProtectRestrictHandlesToProcessAndThread()</span></div>
+<div class="vbox-code-label"><span>SUPDrv-win.cpp:5441</span><span>supdrvNtProtectRestrictHandlesToProcessAndThread()</span></div>
 <pre class="vbox-code-block"><code>if (handle targets P3 &&
     rights include PROCESS_VM_WRITE)
     verification fails;</code></pre>
 
 <div class="vbox-code-caption">A writable parent handle must be gone before verification.</div>
 
-<!-- Slide code is explanatory pseudocode, not a verbatim excerpt. supdrvNtProtectRestrictHandlesToProcessAndThread in SUPDrv-win.cpp scans SystemExtendedHandleInformation and counts handles to the protected process whose GrantedAccess intersects SUPDRV_NT_EVIL_PROCESS_RIGHTS. The real code exempts handles within the protected process, a bounded CSRSS handle, and certain System handles, and also checks the primary thread and inheritable handles. SUPDRV_NT_EVIL_PROCESS_RIGHTS includes PROCESS_VM_WRITE, PROCESS_VM_OPERATION, and other dangerous rights. This is a current-state handle check, not a history of past writes. https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPDrv-win.cpp -->
+<!-- Slide code is explanatory pseudocode, not a verbatim excerpt. Line 5441 is the GrantedAccess/SUPDRV_NT_EVIL_PROCESS_RIGHTS check in pinned VirtualBox revision a85a9b457af490dade7671c2c99de1db899804e1. supdrvNtProtectRestrictHandlesToProcessAndThread scans SystemExtendedHandleInformation and counts handles to the protected process with dangerous rights. The real code exempts handles within the protected process, a bounded CSRSS handle, and certain System handles, and also checks the primary thread and inheritable handles. SUPDRV_NT_EVIL_PROCESS_RIGHTS includes PROCESS_VM_WRITE, PROCESS_VM_OPERATION, and other dangerous rights. This is a current-state handle check, not a history of past writes. https://github.com/VirtualBox/virtualbox/blob/a85a9b457af490dade7671c2c99de1db899804e1/src/VBox/HostDrivers/Support/win/SUPDrv-win.cpp#L5441 -->
 
 ---
 
