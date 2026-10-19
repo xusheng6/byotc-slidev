@@ -304,7 +304,7 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-chain .si-evil, .si-family .si-evil { border-color:var(--orange); color:var(--orange); }
 .si-chain.two { max-width:900px; margin-left:70px; }
 .si-creator-flow { display:flex; align-items:center; max-width:930px; gap:36px; margin:100px auto 0; }
-.si-creator-flow div { flex:1; border-top:5px solid var(--line); padding-top:23px; font-size:43px; font-weight:800; }
+.si-creator-flow div { flex:1; min-height:150px; border:3px solid var(--line); border-radius:12px; background:#11202a; padding:22px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:43px; font-weight:800; }
 .si-creator-flow b { color:var(--aqua); font-size:57px; }
 .si-creator-flow .si-evil { color:var(--orange); border-color:var(--orange); }
 .si-creator-flow .si-final { border-color:var(--aqua); }
@@ -312,7 +312,7 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-creator-rights strong { color:var(--aqua); }
 .si-parent-comparison { display:flex; flex-direction:column; gap:58px; margin-top:83px; }
 .si-parent-row { display:flex; align-items:center; gap:15px; }
-.si-parent-row div { flex:1; min-width:0; border-top:4px solid var(--line); padding-top:17px; font-size:30px; line-height:1.1; font-weight:800; }
+.si-parent-row div { flex:1; min-width:0; min-height:125px; border:3px solid var(--line); border-radius:12px; background:#11202a; padding:16px 12px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-size:29px; line-height:1.1; font-weight:800; }
 .si-parent-row div:first-child, .si-parent-row div:nth-of-type(2) { flex:1.2; }
 .si-parent-row b { flex:none; font-size:40px; color:var(--aqua); }
 .si-parent-row small, .si-grandparent small { display:block; margin-top:14px; color:var(--muted); font-size:24px; }
@@ -320,7 +320,7 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-parent-row .si-evil, .si-parent-row .si-denied { border-color:var(--orange); color:var(--orange); }
 .si-parent-row:last-child b { color:var(--orange); }
 .si-grandparent { display:flex; align-items:center; gap:12px; margin-top:130px; }
-.si-grandparent div { flex:1; min-width:0; border-top:4px solid var(--line); padding-top:19px; font-size:27px; line-height:1.12; font-weight:800; }
+.si-grandparent div { flex:1; min-width:0; min-height:155px; border:3px solid var(--line); border-radius:12px; background:#11202a; padding:17px 11px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-size:27px; line-height:1.12; font-weight:800; }
 .si-grandparent b { flex:none; color:var(--aqua); font-size:38px; }
 .si-grandparent .si-evil { border-color:var(--orange); color:var(--orange); }
 .si-grandparent .si-final, .si-grandparent .si-request { border-color:var(--aqua); }
