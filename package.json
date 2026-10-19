@@ -2,7 +2,7 @@
   "name": "byotc-slidev-mockup",
   "private": true,
   "scripts": {
-    "dev": "slidev --open=false",
+    "dev": "CHOKIDAR_USEPOLLING=true slidev --open=false",
     "build": "slidev build",
     "export": "slidev export"
   },
