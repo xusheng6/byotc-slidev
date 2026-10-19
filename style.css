@@ -5,6 +5,9 @@ html, body, #app { background:var(--bg); }
 h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035em; font-weight:780 !important; margin:28px 0 0 !important; }
 .aqua { color:var(--aqua); }
 .deck-subtitle { font-size:32px; color:var(--muted); margin-top:35px; max-width:900px; line-height:1.25; }
+.closing-content { display:flex; align-items:center; justify-content:space-between; gap:42px; margin-top:90px; }
+.closing-content a { color:var(--fg); font-size:43px; font-weight:750; text-decoration:underline; text-decoration-color:var(--aqua); text-underline-offset:9px; white-space:nowrap; }
+.closing-content img { display:block; width:370px; height:370px; flex:none; }
 .cover-name { position:absolute; left:78px; bottom:70px; font-size:27px; color:var(--fg); }
 .bottom-aside { position:absolute; left:78px; bottom:57px; font-size:26px; color:var(--muted); }
 .source-line { position:absolute; left:78px; right:78px; bottom:37px; font-size:17px; color:var(--muted); }

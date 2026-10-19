@@ -621,6 +621,6 @@ fonts:
 
 # Questions?
 
-<div class="deck-subtitle">xusheng.dev/posts/byotc/main</div>
+<div class="closing-content"><a href="https://xusheng.dev/posts/byotc/main/">xusheng.dev/posts/byotc/main</a><img src="/images/byotc-qr.svg" alt="QR code for xusheng.dev/posts/byotc/main"></div>
 
-<!-- Reserve the remaining ten minutes for Q&A. -->
+<!-- The displayed URL and the QR code both lead to https://xusheng.dev/posts/byotc/main/ . Reserve the remaining ten minutes for Q&A. -->
