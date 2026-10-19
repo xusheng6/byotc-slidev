@@ -524,7 +524,7 @@ fonts:
 
 ---
 
-# Three Processes, Two Respawns
+# VirtualBox Launches Three Processes
 
 <div class="vbox-process-chain"><div>Launcher<small>P1</small></div><b>→</b><div>Hardened stub<small>P2</small></div><b>→</b><div class="si-final">VM process<small>P3</small></div></div>
 <div class="vbox-subline">Only P3 receives the privileged driver session.</div>
@@ -533,30 +533,11 @@ fonts:
 
 ---
 
-# The Child Waits for Its Parent
+# P2 Prepares P3, Then the Driver Verifies It
 
-<div class="vbox-steps"><div><strong>P2</strong><span>Creates P3</span></div><b>→</b><div><strong>P3</strong><span>Signals “ready”<br>and waits</span></div><b>→</b><div><strong>P2</strong><span>Purifies P3</span></div></div>
-<div class="vbox-code-name">supR3HardNtChildPurify()</div>
+<div class="vbox-full-sequence"><div><small>1 · P2</small><strong>Creates P3</strong><span>Gets a writable handle</span></div><b>→</b><div><small>2 · P3 + P2</small><strong>P3 waits</strong><span>P2 prepares P3</span></div><b>→</b><div><small>3 · P2</small><strong>Closes handle</strong><span>Signals P3</span></div><b>→</b><div><small>4 · P3</small><strong>Opens VBoxDrv</strong><span>Driver verifies P3</span></div></div>
 
-<!-- P3's supR3HardenedEarlyProcessInit signals kSupR3WinChildReq_PurifyChildAndCloseHandles, then waits on hEvtChild. P2 handles this in supR3HardenedWinDoReSpawn: supR3HardNtChildWaitFor, supR3HardNtChildPurify, supR3HardNtChildSanitizePeb. This sequence repeats for each respawn; the slide zooms into P2→P3. https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPR3HardenedMain-win.cpp -->
-
----
-
-# Close the Powerful Handle
-
-<div class="vbox-handle-flow"><div><small>P2 starts with</small><strong>Writable handle to P3</strong></div><b>→</b><div><small>P2 keeps only</small><strong>Restricted handle</strong></div></div>
-<div class="vbox-code-name">supR3HardNtChildCloseFullAccessHandles()</div>
-
-<!-- Source: supR3HardNtChildCloseFullAccessHandles duplicates pThis->hProcess with restricted rights, then NtClose(pThis->hProcess), replacing it with the restricted handle; closes the original thread handle too. Name says full access, but on current Windows the creator exception can yield a handle including PROCESS_VM_WRITE rather than literal PROCESS_ALL_ACCESS. Driver callback: supdrvNtProtectCallback_ProcessHandlePre. https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPR3HardenedMain-win.cpp ; https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPDrv-win.cpp -->
-
----
-
-# Then P3 Asks for Trust
-
-<div class="vbox-steps"><div><strong>P2</strong><span>Closes handle<br>and signals</span></div><b>→</b><div><strong>P3</strong><span>Opens<br>VBoxDrv device</span></div><b>→</b><div><strong>Driver</strong><span>Verifies P3</span></div></div>
-<div class="vbox-code-name">VBoxDrvNtCreate() → supdrvNtProtectVerifyProcess()</div>
-
-<!-- In supR3HardenedWinDoReSpawn, P2 calls supR3HardNtChildCloseFullAccessHandles, then NtSetEvent(This.hEvtChild). P3 resumes in supR3HardenedEarlyProcessInit and opens the driver. VBoxDrvNtCreate handles the open; for a VmProcessUnconfirmed it calls supdrvNtProtectVerifyProcess before creating the privileged session. The verification includes live handle, process/image, parent, and token checks. Source: https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPR3HardenedMain-win.cpp and https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPDrv-win.cpp -->
+<!-- This is the P2→P3 sequence within the P1→P2→P3 chain. P3's supR3HardenedEarlyProcessInit signals kSupR3WinChildReq_PurifyChildAndCloseHandles and waits on hEvtChild. P2's supR3HardenedWinDoReSpawn calls supR3HardNtChildWaitFor, supR3HardNtChildPurify, supR3HardNtChildSanitizePeb, then supR3HardNtChildCloseFullAccessHandles. The last routine duplicates the process handle with restricted rights and closes the original, whose creator exception can include PROCESS_VM_WRITE. P2 calls NtSetEvent(This.hEvtChild). P3 resumes and opens the VBoxDrv device; VBoxDrvNtCreate calls supdrvNtProtectVerifyProcess for the unconfirmed VM process, checking live handles, image/process, parent, and token before granting the privileged session. Sources: https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPR3HardenedMain-win.cpp and https://github.com/VirtualBox/virtualbox/blob/main/src/VBox/HostDrivers/Support/win/SUPDrv-win.cpp -->
 
 ---
 
