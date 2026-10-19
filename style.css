@@ -206,6 +206,11 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .disclosure-timeline strong { font-size:33px; line-height:1.12; }
 .disclosure-timeline > div:last-child { border-left-color:var(--orange); }
 .disclosure-timeline > div:last-child time { color:var(--orange); }
+.si-disclosure-timeline > div { grid-template-columns:270px 1fr; }
+.si-disclosure-timeline time { font-size:22px; }
+.si-disclosure-timeline strong { font-size:31px; }
+.si-disclosure-timeline > div:last-child { border-left-color:var(--aqua); }
+.si-disclosure-timeline > div:last-child time { color:var(--aqua); }
 .hard-fix { display:flex; flex-direction:column; gap:54px; margin-top:120px; font-size:51px; font-weight:760; line-height:1.14; }
 .hard-fix span { color:var(--aqua); }
 .hard-fix-return { position:absolute; left:78px; bottom:61px; color:var(--muted); font-size:27px; }

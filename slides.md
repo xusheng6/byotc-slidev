@@ -503,6 +503,19 @@ fonts:
 
 ---
 
+# System Informer disclosure timeline
+
+<div class="disclosure-timeline si-disclosure-timeline">
+  <div><time>Apr 20, 2025</time><strong>Privately reported the gap</strong></div>
+  <div><time>Apr 20–21, 2025</time><strong>Maintainers authored the PPL-rooted fix</strong></div>
+  <div><time>Feb 1, 2026</time><strong>Rebased fix entered public history</strong></div>
+  <div><time>Aug 29, 2026</time><strong>Signed driver shipped in Release Channel</strong></div>
+</div>
+
+<!-- Dates and scope from the speaker's System Informer disclosure timeline: https://xusheng.dev/posts/byotc/main/ . The initial report was April 20, 2025; maintainer changes were authored during April 20–21 discussions; rebased equivalents entered public repository history February 1, 2026; on August 29, 2026 the maintainer confirmed the updated signed driver shipped in the Release Channel and closed the disclosure loop. -->
+
+---
+
 # VirtualBox hardens the VM process
 
 <div class="backup-statement">A trusted VM process gets a <span class="aqua">privileged driver session.</span></div>
