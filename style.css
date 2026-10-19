@@ -386,6 +386,7 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .vbox-commit-lines { display:flex; flex-direction:column; gap:12px; margin-top:68px; }
 .vbox-commit-lines div { display:flex; gap:30px; padding:15px 20px; border-left:4px solid var(--aqua); background:#11202a; font-size:27px; font-weight:760; }
 .vbox-commit-lines a { color:var(--aqua); font-family:Menlo,monospace; text-decoration:underline; text-underline-offset:4px; }
+.vbox-no-notice { margin-top:35px; font-size:32px; font-weight:800; }
 .vbox-version-pair div { text-align:center; align-items:center; }
 .vbox-version-pair strong { color:var(--aqua); font-size:48px; }
 .vbox-version-pair span { margin-top:18px; font-size:30px; font-weight:800; }

@@ -592,10 +592,11 @@ fonts:
 
 ---
 
-# How About Having AI Prove the Bug?
+# How About Having AI Make the PoC?
 
 <div class="vbox-patch-reveal">But the bug was already patched in <span class="aqua">April 2026.</span></div>
 <div class="vbox-commit-lines"><div><a href="https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592">bcfbf910</a><span>Return-address checks</span></div><div><a href="https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a">6485c4ed</a><span>Full stack-consistency checks</span></div></div>
+<div class="vbox-no-notice">I was not acknowledged or notified.</div>
 
 <!-- After Oracle declined the report, the speaker realized AI could help build the requested PoC. Public source commits bcfbf910d779b927a94dbb5d82b6527664093592 and 6485c4edbb37dd133c14f3f561c6eab69979000a, authored April 16, 2026, added return-address and full stack-consistency checks. The speaker's August 22 follow-up says these blocked the original stack-based route. The correspondence reviewed does not tie the commits to S2240975 or explain Oracle's reason for them. No notice of these changes appeared in that disclosure thread. Sources: https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592 and https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a . -->
 
