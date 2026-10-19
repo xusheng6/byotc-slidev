@@ -13,7 +13,7 @@ fonts:
 # Bring Your Own<br><span class="aqua">Trusted Caller</span>
 
 <div class="deck-subtitle">A New Way to Exploit Vulnerable Windows Drivers</div>
-<div class="cover-name">Xusheng Li</div>
+<div class="cover-name">Xusheng Li | Vector 35</div>
 
 <!-- Opening sequence draft. Later case-study claims need exact evidence, versions, and scope. -->
 
