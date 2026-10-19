@@ -611,11 +611,11 @@ fonts:
 
 ---
 
-# Move AV enforcement<br><span class="aqua">out of the kernel?</span>
+# What About WESP?
 
-<div class="hero-sub">The client-to-service boundary still matters.</div>
+<div class="wesp-lines"><div>Windows Endpoint Security Platform moves AV policy to user mode, with shared kernel enforcement.</div><div>Its normal AV client path requires Antimalware PPL and a WESP permission.</div><div>Utilities like System Informer and VirtualBox still have their own driver-client boundary.</div></div>
 
-<!-- Microsoft's WESP preview proposes moving some AV enforcement into user mode. This may reduce some kernel-driver risk, but it does not by itself authenticate a client or protect that client's runtime integrity. This is a design inference, not a claim about a final shipped architecture. Source: https://blogs.windows.com/windowsexperience/2025/11/18/preparing-for-whats-next-windows-security-and-resiliency-innovations-help-organizations-mitigate-risks-recover-faster-and-prepare-for-the-era-of-ai/ -->
+<!-- WESP is currently a preview, not a universal replacement for vendor drivers. Microsoft's overview says WESP shifts AV enforcement toward user mode while Windows provides the platform: https://blogs.windows.com/windowsexperience/2025/11/18/preparing-for-whats-next-windows-security-and-resiliency-innovations-help-organizations-mitigate-risks-recover-faster-and-prepare-for-the-era-of-ai/ . The speaker's September 10, 2026 analysis of Insider build 29661.1000 in /Users/xusheng/wesp-analysis/REPORT.md finds that the ordinary production partner path requires both the WESP://Permission token attribute and Antimalware PPL (level 0x31), addressing normal administrative injection into that client. Do not say *all* WESP clients require PPL: the preview contains a distinct delegated permission value without the PPL check, whose issuer and scope remain unverified. WESP does not secure legacy vendor drivers or private IPC, and System Informer/VirtualBox are utility examples outside the normal AV WESP migration story. -->
 
 ---
 

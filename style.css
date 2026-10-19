@@ -89,6 +89,7 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .gate-check { border-color:var(--aqua); color:var(--aqua); }
 .closing-line { font-size:40px; color:var(--muted); margin-top:95px; border-left:6px solid var(--aqua); padding-left:23px; }
 .hero-sub { font-size:38px; color:var(--muted); margin-top:70px; max-width:1000px; }
+.wesp-lines { display:flex; flex-direction:column; gap:35px; margin-top:70px; max-width:1100px; font-size:36px; line-height:1.18; font-weight:760; }
 .mode-split { display:flex; align-items:center; gap:28px; margin-top:82px; }
 .mode-box { width:44%; min-height:280px; border:3px solid var(--aqua); border-radius:14px; padding:33px 38px; display:flex; flex-direction:column; justify-content:space-between; background:#11202a; }
 .mode-box span, .request-node span, .signature-pair span { color:var(--aqua); font-size:20px; font-weight:850; letter-spacing:.1em; }
