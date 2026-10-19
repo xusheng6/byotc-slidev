@@ -583,7 +583,7 @@ fonts:
 <div class="disclosure-timeline vbox-disclosure-timeline">
   <div><time>Jun 12, 2025</time><strong>Reported the proposed bypass</strong></div>
   <div><time>Dec 22, 2025</time><strong>After six months, Oracle disputed it</strong></div>
-  <div><time>Jan 2026</time><strong>Explained the P2 → P3 timing</strong></div>
+  <div><time>Jan 2026</time><strong>Oracle asked for a PoC; I explained the P2 → P3 path</strong></div>
   <div><time>Jun 3, 2026</time><strong>Oracle declined: final-child path unproven</strong></div>
 </div>
 
@@ -591,17 +591,18 @@ fonts:
 
 ---
 
-# They Wanted a PoC
+# Behind the Scenes
 
-<div class="vbox-attack-contrast"><div><small>Oracle's question</small><strong>Can this reach P3?</strong></div><div><small>My obstacle</small><strong>A full ROP chain was a lot of work.</strong></div></div>
+<div class="vbox-attack-contrast"><div><small>Oracle's request</small><strong>A working PoC. Fair.</strong></div><div><small>My obstacle</small><strong>A full ROP chain was a lot of work.</strong></div></div>
+<div class="vbox-closure">I left it unfinished. On June 3, Oracle declined the report.</div>
 
-<!-- On January 15, 2026 Oracle asked for a proof of concept because its team did not believe the theory was exploitable. The speaker replied January 16 that the two-parent chain and ROP construction would require substantial effort. Oracle declined the report June 3, 2026 because a feasible path through the final child had not been demonstrated. The original June 2025 report explicitly said a full exploit would be complex to construct. Sources: Oracle S2240975 email threads. -->
+<!-- On January 15, 2026 Oracle asked for a proof of concept because its team did not believe the theory was exploitable. The speaker replied January 16 that the two-parent chain and ROP construction would require substantial effort. The speaker did not complete that PoC then. Oracle declined the report June 3, 2026 because a feasible path through the final child had not been demonstrated. Oracle's email says it declined the report; do not assert a case-closure status beyond that wording. Sources: Oracle S2240975 email threads. -->
 
 ---
 
 # So I Asked AI to Build It
 
-<div class="vbox-big-lines"><div>Revisit the VirtualBox report.</div><div>Ask for an <span class="aqua">end-to-end PoC.</span></div></div>
+<div class="vbox-big-lines"><div>Then I realized:</div><div>AI could help build the <span class="aqua">PoC.</span></div></div>
 
 <!-- The speaker later used AI assistance to build the proof of concept. The August 22, 2026 Oracle follow-up reports a stock-signed VirtualBox 7.2.6a demonstration: attacker-controlled ROP in final P3, a marker write, and return to VirtualBox's original continuation. It used unmodified signed executables and driver. Describe this as AI-assisted research, not as evidence that every step was autonomous. Source: August 22, 2026 follow-up for S2240975. -->
 
@@ -609,7 +610,7 @@ fonts:
 
 # An April Surprise in the Source
 
-<div class="vbox-hardening"><div><time>Apr 16, 2026</time><strong>Return-address checks</strong></div><div><time>Apr 16, 2026</time><strong>Full stack-consistency checks</strong></div></div>
+<div class="vbox-hardening"><div><time>Apr 16 · <a href="https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592">bcfbf910</a></time><strong>Adding return address checks to the hardening code</strong></div><div><time>Apr 16 · <a href="https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a">6485c4ed</a></time><strong>Added full stack consistency checks</strong></div></div>
 
 <!-- Public source commits bcfbf910d779b927a94dbb5d82b6527664093592 and 6485c4edbb37dd133c14f3f561c6eab69979000a, both authored April 16, 2026. Their commit messages say they add return-address and full stack-consistency checks. The latter includes stack hashing around selected waits and related syscalls. The speaker's August 22 report says these changes block the original stack-based PoC. The correspondence reviewed does not tie the commits to Oracle case S2240975 or explain the internal reason for the changes; avoid asserting that Oracle secretly fixed this report. Sources: https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592 and https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a . -->
 
