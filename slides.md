@@ -506,13 +506,13 @@ fonts:
 # System Informer disclosure timeline
 
 <div class="disclosure-timeline si-disclosure-timeline">
-  <div><time>Apr 20, 2025</time><strong>Privately reported the gap</strong></div>
-  <div><time>Apr 21, 2025</time><strong>Maintainer proposed code changes</strong></div>
-  <div><time>Jan 22, 2026</time><strong>Signing account restored; release pending</strong></div>
+  <div><time>Apr 20, 2025</time><strong>Privately reported the issue</strong></div>
+  <div><time>Apr 21, 2025</time><strong>Maintainer proposed a fix</strong></div>
+  <div><time>Feb 1, 2026</time><strong>Rebased fix entered public history</strong></div>
   <div><time>Aug 29, 2026</time><strong>Signed driver shipped in Release Channel</strong></div>
 </div>
 
-<!-- Original disclosure email: Apr 20, 2025, 14:16 +0800. Johnny Shaw's Apr 21, 2025, 00:48 -0600 reply described changes he had implemented and linked the commits, but the updated signed driver was not yet released. On Jan 22, 2026 he said Microsoft's signing account had been restored and release still required signing and testing. On Aug 29, 2026 he confirmed the updated signed driver shipped in the Release Channel. Gmail thread: https://mail.google.com/mail/u/?authuser=xusheng%40vector35.com#all/19651b14e5b133c0 . -->
+<!-- Original disclosure email: Apr 20, 2025, 14:16 +0800. Johnny Shaw's Apr 21, 2025, 00:48 -0600 reply described changes he had implemented and linked the commits, but the updated signed driver was not yet released. Rebased equivalents entered public repository history Feb 1, 2026. On Aug 29, 2026 he confirmed the updated signed driver shipped in the Release Channel. Gmail thread: https://mail.google.com/mail/u/?authuser=xusheng%40vector35.com#all/19651b14e5b133c0 . -->
 
 ---
 
