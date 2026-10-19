@@ -592,27 +592,12 @@ fonts:
 
 ---
 
-# Wait. AI Could Build the PoC.
+# How About Having AI Prove the Bug?
 
-<div class="vbox-revelation"></div>
+<div class="vbox-patch-reveal">But the bug was already patched in <span class="aqua">April 2026.</span></div>
+<div class="vbox-commit-lines"><div><a href="https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592">bcfbf910</a><span>Return-address checks</span></div><div><a href="https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a">6485c4ed</a><span>Full stack-consistency checks</span></div></div>
 
-<!-- Light comic beat. Oracle requested a PoC on January 15, 2026; the speaker replied January 16 that the two-parent chain and ROP construction would require substantial effort. After Oracle declined the report on June 3, the speaker realized AI could help produce the PoC. Original illustration generated for this deck, public/images/ai-epiphany.png. -->
-
----
-
-# But the Bug Was Already Patched
-
-<div class="vbox-big-lines"><div>April 2026: VirtualBox added new checks.</div><div>No notice in our <span class="aqua">disclosure thread.</span></div></div>
-
-<!-- The speaker later found April 16, 2026 source commits adding return-address and full stack-consistency checks. The August 22 follow-up says these blocked the original stack-based technique. The reviewed Oracle disclosure thread does not notify the speaker of these changes or credit the report. This supports 'no notice in our disclosure thread,' but not a claim about Oracle's internal reason for the commits or whether the report caused them. -->
-
----
-
-# April 2026: New Checks
-
-<div class="vbox-hardening"><div><time>Apr 16, 2026 · <a href="https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592">bcfbf910</a></time><strong>Adding return address checks to the hardening code</strong></div><div><time>Apr 16, 2026 · <a href="https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a">6485c4ed</a></time><strong>Added full stack consistency checks</strong></div></div>
-
-<!-- Public source commits bcfbf910d779b927a94dbb5d82b6527664093592 and 6485c4edbb37dd133c14f3f561c6eab69979000a, both authored April 16, 2026. Their commit messages say they add return-address and full stack-consistency checks. The latter includes stack hashing around selected waits and related syscalls. The speaker's August 22 report says these changes block the original stack-based PoC. The correspondence reviewed does not tie the commits to Oracle case S2240975 or explain the internal reason for the changes; avoid asserting that Oracle secretly fixed this report. Sources: https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592 and https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a . -->
+<!-- After Oracle declined the report, the speaker realized AI could help build the requested PoC. Public source commits bcfbf910d779b927a94dbb5d82b6527664093592 and 6485c4edbb37dd133c14f3f561c6eab69979000a, authored April 16, 2026, added return-address and full stack-consistency checks. The speaker's August 22 follow-up says these blocked the original stack-based route. The correspondence reviewed does not tie the commits to S2240975 or explain Oracle's reason for them. No notice of these changes appeared in that disclosure thread. Sources: https://github.com/VirtualBox/virtualbox/commit/bcfbf910d779b927a94dbb5d82b6527664093592 and https://github.com/VirtualBox/virtualbox/commit/6485c4edbb37dd133c14f3f561c6eab69979000a . -->
 
 ---
 
