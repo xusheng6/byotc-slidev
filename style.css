@@ -304,16 +304,17 @@ h1 { font-size:61px !important; line-height:1.1 !important; letter-spacing:-.035
 .si-chain .si-final, .si-family .si-final, .vbox-outcome div:last-child { border-color:var(--aqua); }
 .si-chain .si-evil, .si-family .si-evil { border-color:var(--orange); color:var(--orange); }
 .si-chain.two { max-width:900px; margin-left:70px; }
-.si-creator-flow { display:flex; align-items:center; max-width:1030px; gap:24px; margin:100px auto 0; }
-.si-creator-flow div { flex:1; min-height:150px; border:3px solid var(--line); border-radius:12px; background:#11202a; padding:22px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:43px; font-weight:800; }
+.si-creator-flow { display:flex; align-items:center; max-width:1030px; gap:24px; margin:65px auto 0; }
+.si-creator-flow div { flex:1; min-height:130px; border:3px solid var(--line); border-radius:12px; background:#11202a; padding:20px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:43px; font-weight:800; }
 .si-create-arrow { flex:none; min-width:240px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; }
 .si-create-arrow span { color:var(--aqua); font:27px Menlo,monospace; }
 .si-create-arrow b { color:var(--aqua); font-size:57px; line-height:.9; }
 .si-creator-flow .si-evil { color:var(--orange); border-color:var(--orange); }
 .si-creator-flow .si-final { border-color:var(--aqua); }
-.si-creator-rights { margin-top:60px; font-size:36px; line-height:1.32; font-weight:740; }
+.si-creator-rights { margin-top:35px; font-size:36px; line-height:1.32; font-weight:740; }
 .si-creator-rights strong { color:var(--aqua); }
-.si-creator-access { margin-top:20px; padding:17px 20px; border:3px solid var(--line); border-radius:12px; background:#11202a; display:flex; flex-direction:column; gap:10px; }
+.si-launch-warning { margin-top:12px; border:3px solid var(--orange); border-radius:12px; background:#11202a; padding:10px 20px; color:var(--fg); font-size:29px; font-weight:740; }
+.si-creator-access { margin-top:12px; padding:12px 20px; border:3px solid var(--line); border-radius:12px; background:#11202a; display:flex; flex-direction:column; gap:5px; }
 .si-creator-access span { color:var(--aqua); font-size:32px; font-weight:740; }
 .si-creator-access code { color:var(--fg); font:28px/1.4 Menlo,monospace; white-space:nowrap; }
 .si-parent-comparison { display:flex; flex-direction:column; gap:58px; margin-top:83px; }

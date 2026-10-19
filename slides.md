@@ -467,7 +467,8 @@ fonts:
 # Be the Parent
 
 <div class="si-creator-flow"><div class="si-evil">evil.exe</div><section class="si-create-arrow"><span>CreateProcessA</span><b>→</b></section><div class="si-final">SystemInformer.exe</div></div>
-<div class="si-creator-rights">Parent receives <strong>PROCESS_ALL_ACCESS</strong> by default.<br>Deny these rights, and System Informer may fail to launch.</div>
+<div class="si-creator-rights">Parent receives <strong>PROCESS_ALL_ACCESS</strong> by default.</div>
+<div class="si-launch-warning">Deny these rights, and System Informer may fail to launch.</div>
 <div class="si-creator-access"><span>So the driver still permits:</span><code>PROCESS_VM_READ | PROCESS_VM_WRITE | PROCESS_VM_OPERATION</code></div>
 
 <!-- CreateProcess returns creator handles with full access by default, subject to security restrictions: https://learn.microsoft.com/en-us/windows/win32/procthread/process-security-and-access-rights . The affected System Informer Object Manager callback could reduce that mask. Its creator exception added KPH_PROCESS_READ_ACCESS (which includes PROCESS_VM_READ), PROCESS_TERMINATE, PROCESS_VM_OPERATION, PROCESS_VM_WRITE. For threads it added KPH_THREAD_READ_ACCESS (including THREAD_GET_CONTEXT), THREAD_TERMINATE, THREAD_RESUME. THREAD_SET_CONTEXT was not in this creator exception. The slide lists selected process rights, not an exhaustive final handle mask. Removing the exception outright was reported to break process initialization; this is why the launch path needed a different trust root. Sources: https://xusheng.dev/posts/byotc/main/ , https://github.com/winsiderss/systeminformer/blob/553d309edb07934bda9387cff29a82ca1714acbb/KSystemInformer/protection.c#L581-L829 , https://github.com/winsiderss/systeminformer/blob/553d309edb07934bda9387cff29a82ca1714acbb/kphlib/include/kphapi.h . -->
