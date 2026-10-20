@@ -45,7 +45,7 @@ fonts:
 ---
 
 <div class="variant-statement recap-statement">
-  <div>First, a recap:</div>
+  <div>Recap:</div>
   <div>Bring Your Own Vulnerable Driver (BYOVD)</div>
 </div>
 
@@ -369,14 +369,6 @@ fonts:
 </div>
 
 <!-- This is a slide-writing paraphrase of the user's described one-shot request, not a verbatim quotation. Original prompt text was not located in the available local research artifacts; replace this with exact excerpts if the original conversation is found. -->
-
----
-
-# Agentic Vulnerability Research
-
-<div class="agentic-photo-placeholder">Photo placeholder</div>
-
-<!-- Replace the placeholder with the speaker's photo of using AI agents on a phone while sitting on the couch. Talk track: this is often how the speaker does vulnerability research in free time while spending time with family. Keep the slide image-led and avoid adding a caption transcript. -->
 
 ---
 
