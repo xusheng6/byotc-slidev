@@ -624,6 +624,6 @@ fonts:
 
 # Questions?
 
-<div class="closing-content"><a href="https://xusheng.dev/posts/byotc/main/">xusheng.dev/posts/byotc/main</a><img src="/images/byotc-qr.svg" alt="QR code for xusheng.dev/posts/byotc/main"></div>
+<div class="closing-content"><div class="closing-links"><a href="https://xusheng.dev/posts/byotc/main/">xusheng.dev/posts/byotc/main</a><a href="mailto:xusheng@vector35.com">xusheng@vector35.com</a></div><img src="/images/byotc-qr.svg" alt="QR code for xusheng.dev/posts/byotc/main"></div>
 
-<!-- The displayed URL and the QR code both lead to https://xusheng.dev/posts/byotc/main/ . Reserve the remaining ten minutes for Q&A. -->
+<!-- The displayed URL and the QR code both lead to https://xusheng.dev/posts/byotc/main/ . The email address is the speaker's Vector 35 contact. Reserve the remaining ten minutes for Q&A. -->
